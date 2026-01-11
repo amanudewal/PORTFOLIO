@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMAN.SYS | V2.0</title>
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
+    <!-- Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+</head>
+<body data-theme="dark">
+
+    <!-- Background Grid Effect -->
+    <div class="bg-grid"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="sys-loading">
+            <div class="blink-text">SYSTEM BOOT_SEQUENCE</div>
+            <div class="load-bar-wrapper">
+                <div class="load-bar"></div>
+            </div>
+            <div class="hex-codes">0x45F... LOADED</div>
+        </div>
+    </div>
+
+    <!-- Fixed Header -->
+    <header class="fixed-header">
+        <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
+        <div class="status-indicator">
+            <span class="dot"></span> SYSTEM ONLINE
+        </div>
+        <nav>
+            <a href="#hero" class="nav-item">HOME [01]</a>
+            <a href="#about" class="nav-item">DATA [02]</a>
+            <a href="#work" class="nav-item">WORK [03]</a>
+            <a href="#contact" class="nav-item highlight">LINK [04]</a>
+            <!-- THEME TOGGLE BUTTON -->
+            <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO SECTION -->
+        <section id="hero">
+            <div class="hero-grid">
+                <!-- Left: Typography -->
+                <div class="hero-content">
+                    <div class="meta-tag">
+                        <span>// FINAL_YEAR_CSE</span>
+                        <span>// AI_ARCHITECT</span>
+                    </div>
+                    <h1 class="glitch-title">
+                        DIGITAL <br>
+                        <span class="hollow">REALITY</span> <br>
+                        ENGINEER
+                    </h1>
+                    <p class="terminal-text">
+                        > INITIATING NEURAL_NETWORKS...<br>
+                        > OPTIMIZING FLUTTER_PIPELINES...<br>
+                        > TARGET: GATE_2026
+                    </p>
+                    
+                    <a href="#work" class="cyber-btn">
+                        <span class="btn-text">INITIALIZE PROTOCOL</span>
+                        <span class="btn-glitch"></span>
+                    </a>
+                </div>
+
+                <!-- Right: 3D Scanner -->
+                <div class="hero-visual">
+                    <div class="scanner-frame">
+                        <div class="scan-line"></div>
+                        <div class="corner tl"></div>
+                        <div class="corner tr"></div>
+                        <div class="corner bl"></div>
+                        <div class="corner br"></div>
+                        
+                        <model-viewer 
+                            id="hero-avatar"
+                            src="assets/model.glb" 
+                            shadow-intensity="0" 
+                            camera-controls="false"
+                            disable-zoom disable-pan disable-tap
+                            environment-image="neutral"
+                            autoplay
+                        ></model-viewer>
+                    </div>
+                    <div class="model-caption">
+                        FIG 1.0: THE_ARCHITECT
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Infinite Marquee -->
+            <div class="marquee-container">
+                <div class="marquee-content">
+                    AI ENGINEER /// APP DEVELOPER /// MEDIA FORENSICS /// UI ARCHITECT /// DEEP LEARNING /// 
+                    AI ENGINEER /// APP DEVELOPER /// MEDIA FORENSICS /// UI ARCHITECT /// DEEP LEARNING /// 
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT / SKILLS HYBRID SECTION -->
+        <section id="about">
+            <div class="section-border-top"></div>
+            <div class="split-layout">
+                <div class="bio-panel">
+                    <h2 class="section-header">CORE_DATA</h2>
+                    <p class="justify-text">
+                        I engineer <span class="accent">intelligence</span>. My mission operates at the boundary of 
+                        secure AI systems and high-performance mobile architecture.
+                        Currently deploying hybrid CNN-RNN networks to combat deepfakes while 
+                        crafting 60FPS fluid interfaces in Flutter.
+                    </p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <h3>03+</h3>
+                            <span>YEARS_EXP</span>
+                        </div>
+                        <div class="stat-box">
+                            <h3>10+</h3>
+                            <span>DEPLOYMENTS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-panel">
+                    <h2 class="section-header">ARSENAL</h2>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <span>FLUTTER / DART</span>
+                            <div class="progress"><div class="fill" style="width: 95%"></div></div>
+                        </li>
+                        <li class="skill-item">
+                            <span>PYTHON / AI</span>
+                            <div class="progress"><div class="fill" style="width: 90%"></div></div>
+                        </li>
+                        <li class="skill-item">
+                            <span>TENSORFLOW</span>
+                            <div class="progress"><div class="fill" style="width: 85%"></div></div>
+                        </li>
+                        <li class="skill-item">
+                            <span>C++ / DSA</span>
+                            <div class="progress"><div class="fill" style="width: 80%"></div></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="work">
+            <div class="section-border-top"></div>
+            <div class="container">
+                <h2 class="section-header big" style="padding: 40px;">SELECTED_WORKS</h2>
+                
+                <div class="project-catalog">
+                    
+                    <!-- Item 1 -->
+                    <div class="catalog-item">
+                        <div class="cat-id">001</div>
+                        <div class="cat-info">
+                            <h3>DEEPFAKE_DETECTOR</h3>
+                            <p>HYBRID CNN-RNN FORENSIC SYSTEM</p>
+                            <div class="tags">
+                                <span>PYTHON</span> / <span>OPENCV</span> / <span>KERAS</span>
+                            </div>
+                        </div>
+                        <div class="cat-action">
+                            <a href="#"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="catalog-item">
+                        <div class="cat-id">002</div>
+                        <div class="cat-info">
+                            <h3>MENTAL_HEALTH_AI</h3>
+                            <p>SIH 2025: NLP CHATBOT ECOSYSTEM</p>
+                            <div class="tags">
+                                <span>FLUTTER</span> / <span>FIREBASE</span> / <span>BERT</span>
+                            </div>
+                        </div>
+                        <div class="cat-action">
+                            <a href="#"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="catalog-item">
+                        <div class="cat-id">003</div>
+                        <div class="cat-info">
+                            <h3>CINEMATIC_GEN_AI</h3>
+                            <p>STABLE DIFFUSION LORA PIPELINE</p>
+                            <div class="tags">
+                                <span>GENERATIVE AI</span> / <span>GRADIO</span>
+                            </div>
+                        </div>
+                        <div class="cat-action">
+                            <a href="#"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <section id="contact">
+            <div class="marquee-container reverse">
+                <div class="marquee-content">
+                    CONTACT ME /// AVAILABLE FOR HIRE /// CONTACT ME /// AVAILABLE FOR HIRE /// 
+                    CONTACT ME /// AVAILABLE FOR HIRE /// CONTACT ME /// AVAILABLE FOR HIRE /// 
+                </div>
+            </div>
+            
+            <div class="footer-grid">
+                <div class="footer-cta">
+                    <h2>INITIATE<br>COMMUNICATION</h2>
+                    <a href="mailto:aman@example.com" class="email-link">AMAN@EXAMPLE.COM</a>
+                </div>
+                <div class="footer-links">
+                    <a href="#">GITHUB_REPO</a>
+                    <a href="#">LINKEDIN_PROFILE</a>
+                    <a href="#">RESUME_V2</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
