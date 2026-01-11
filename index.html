@@ -21,6 +21,11 @@
 </head>
 <body data-theme="dark">
 
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="assets/bg-music.mp3" type="audio/mp3">
+    </audio>
+
     <!-- Background Grid Effect -->
     <div class="bg-grid"></div>
     <div class="noise-overlay"></div>
@@ -50,8 +55,8 @@
             <a href="#hero" class="nav-item">HOME [01]</a>
             <a href="#about" class="nav-item">DATA [02]</a>
             <a href="#work" class="nav-item">WORK [03]</a>
-            <a href="#contact" class="nav-item highlight">LINK [04]</a>
-            <!-- THEME TOGGLE BUTTON -->
+            <a href="#contact" class="nav-item highlight">COMM_HUB [04]</a>
+            <button id="sound-toggle" class="nav-item toggle-btn">SOUND [OFF]</button>
             <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
         </nav>
     </header>
@@ -61,7 +66,6 @@
         <!-- HERO SECTION -->
         <section id="hero">
             <div class="hero-grid">
-                <!-- Left: Typography -->
                 <div class="hero-content">
                     <div class="meta-tag">
                         <span>// FINAL_YEAR_CSE</span>
@@ -84,7 +88,6 @@
                     </a>
                 </div>
 
-                <!-- Right: 3D Scanner -->
                 <div class="hero-visual">
                     <div class="scanner-frame">
                         <div class="scan-line"></div>
@@ -96,11 +99,15 @@
                         <model-viewer 
                             id="hero-avatar"
                             src="assets/model.glb" 
-                            shadow-intensity="0" 
+                            shadow-intensity="1.5" 
+                            shadow-softness="1"
+                            tone-mapping="aces"
+                            exposure="1.2"
                             camera-controls="false"
                             disable-zoom disable-pan disable-tap
                             environment-image="neutral"
                             autoplay
+                            field-of-view="30deg"
                         ></model-viewer>
                     </div>
                     <div class="model-caption">
@@ -109,7 +116,6 @@
                 </div>
             </div>
             
-            <!-- Infinite Marquee -->
             <div class="marquee-container">
                 <div class="marquee-content">
                     AI ENGINEER /// APP DEVELOPER /// MEDIA FORENSICS /// UI ARCHITECT /// DEEP LEARNING /// 
@@ -118,7 +124,7 @@
             </div>
         </section>
 
-        <!-- ABOUT / SKILLS HYBRID SECTION -->
+        <!-- ABOUT / SKILLS -->
         <section id="about">
             <div class="section-border-top"></div>
             <div class="split-layout">
@@ -130,118 +136,118 @@
                         Currently deploying hybrid CNN-RNN networks to combat deepfakes while 
                         crafting 60FPS fluid interfaces in Flutter.
                     </p>
-                    
                     <div class="stats-grid">
-                        <div class="stat-box">
-                            <h3>03+</h3>
-                            <span>YEARS_EXP</span>
-                        </div>
-                        <div class="stat-box">
-                            <h3>10+</h3>
-                            <span>DEPLOYMENTS</span>
-                        </div>
+                        <div class="stat-box"><h3>03+</h3><span>YEARS_EXP</span></div>
+                        <div class="stat-box"><h3>10+</h3><span>DEPLOYMENTS</span></div>
                     </div>
                 </div>
                 
                 <div class="skills-panel">
                     <h2 class="section-header">ARSENAL</h2>
                     <ul class="skill-list">
-                        <li class="skill-item">
-                            <span>FLUTTER / DART</span>
-                            <div class="progress"><div class="fill" style="width: 95%"></div></div>
-                        </li>
-                        <li class="skill-item">
-                            <span>PYTHON / AI</span>
-                            <div class="progress"><div class="fill" style="width: 90%"></div></div>
-                        </li>
-                        <li class="skill-item">
-                            <span>TENSORFLOW</span>
-                            <div class="progress"><div class="fill" style="width: 85%"></div></div>
-                        </li>
-                        <li class="skill-item">
-                            <span>C++ / DSA</span>
-                            <div class="progress"><div class="fill" style="width: 80%"></div></div>
-                        </li>
+                        <li class="skill-item"><span>FLUTTER / DART</span><div class="progress"><div class="fill" style="width: 95%"></div></div></li>
+                        <li class="skill-item"><span>PYTHON / AI</span><div class="progress"><div class="fill" style="width: 90%"></div></div></li>
+                        <li class="skill-item"><span>TENSORFLOW</span><div class="progress"><div class="fill" style="width: 85%"></div></div></li>
+                        <li class="skill-item"><span>C++ / DSA</span><div class="progress"><div class="fill" style="width: 80%"></div></div></li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- PROJECTS SECTION -->
+        <!-- PROJECTS -->
         <section id="work">
             <div class="section-border-top"></div>
             <div class="container">
                 <h2 class="section-header big" style="padding: 40px;">SELECTED_WORKS</h2>
                 
                 <div class="project-catalog">
-                    
-                    <!-- Item 1 -->
                     <div class="catalog-item">
                         <div class="cat-id">001</div>
                         <div class="cat-info">
                             <h3>DEEPFAKE_DETECTOR</h3>
                             <p>HYBRID CNN-RNN FORENSIC SYSTEM</p>
-                            <div class="tags">
-                                <span>PYTHON</span> / <span>OPENCV</span> / <span>KERAS</span>
-                            </div>
+                            <div class="tags"><span>PYTHON</span> / <span>OPENCV</span> / <span>KERAS</span></div>
                         </div>
-                        <div class="cat-action">
-                            <a href="#"><i class="fas fa-arrow-right"></i></a>
-                        </div>
+                        <div class="cat-action"><a href="project-deepfake.html"><i class="fas fa-arrow-right"></i></a></div>
                     </div>
-
-                    <!-- Item 2 -->
                     <div class="catalog-item">
                         <div class="cat-id">002</div>
                         <div class="cat-info">
                             <h3>MENTAL_HEALTH_AI</h3>
                             <p>SIH 2025: NLP CHATBOT ECOSYSTEM</p>
-                            <div class="tags">
-                                <span>FLUTTER</span> / <span>FIREBASE</span> / <span>BERT</span>
-                            </div>
+                            <div class="tags"><span>FLUTTER</span> / <span>FIREBASE</span> / <span>BERT</span></div>
                         </div>
-                        <div class="cat-action">
-                            <a href="#"><i class="fas fa-arrow-right"></i></a>
-                        </div>
+                        <div class="cat-action"><a href="project-mental-health.html"><i class="fas fa-arrow-right"></i></a></div>
                     </div>
-
-                    <!-- Item 3 -->
                     <div class="catalog-item">
                         <div class="cat-id">003</div>
                         <div class="cat-info">
                             <h3>CINEMATIC_GEN_AI</h3>
                             <p>STABLE DIFFUSION LORA PIPELINE</p>
-                            <div class="tags">
-                                <span>GENERATIVE AI</span> / <span>GRADIO</span>
-                            </div>
+                            <div class="tags"><span>GENERATIVE AI</span> / <span>GRADIO</span></div>
                         </div>
-                        <div class="cat-action">
-                            <a href="#"><i class="fas fa-arrow-right"></i></a>
-                        </div>
+                        <div class="cat-action"><a href="project-gen-ai.html"><i class="fas fa-arrow-right"></i></a></div>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- FOOTER -->
+        <!-- CONTACT HUB -->
         <section id="contact">
-            <div class="marquee-container reverse">
-                <div class="marquee-content">
-                    CONTACT ME /// AVAILABLE FOR HIRE /// CONTACT ME /// AVAILABLE FOR HIRE /// 
-                    CONTACT ME /// AVAILABLE FOR HIRE /// CONTACT ME /// AVAILABLE FOR HIRE /// 
+            <div class="section-border-top"></div>
+            
+            <div class="container" style="padding-top: 50px; text-align: center;">
+                <h2 class="section-header">COMMUNICATION_HUB</h2>
+            </div>
+
+            <div class="comm-hub">
+                
+                <!-- LEFT: EMAIL PANEL (BUY ME A COFFEE) -->
+                <div class="comm-panel">
+                    <div class="comm-header">
+                        <i class="fas fa-coffee"></i>
+                        <h2>BUY ME A COFFEE</h2>
+                    </div>
+                    
+                    <form class="email-form" id="emailForm">
+                        <div class="form-group">
+                            <label>TO:</label>
+                            <input type="text" class="cyber-input" value="udewal.aman@gmail.com" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>SUBJECT:</label>
+                            <input type="text" id="emailSubject" class="cyber-input" placeholder="Project Idea / Just a Hello">
+                        </div>
+                        <div class="form-group">
+                            <label>MESSAGE:</label>
+                            <textarea id="emailBody" class="cyber-input" placeholder="Let's build something awesome..."></textarea>
+                        </div>
+                        <button type="submit" class="cyber-btn" style="width:100%; margin-top:10px;">
+                            SEND MESSAGE
+                        </button>
+                    </form>
                 </div>
+
+                <!-- RIGHT: SOCIAL LINKS (Simple) -->
+                <div class="links-panel">
+                    <div class="footer-links">
+                        <a href="https://github.com/amanudewal" target="_blank">
+                            <i class="fab fa-github"></i> GITHUB_REPO
+                        </a>
+                        <a href="https://www.linkedin.com/in/aman-udewal/" target="_blank">
+                            <i class="fab fa-linkedin"></i> LINKEDIN_PROFILE
+                        </a>
+                        <a href="assets/Aman_Resume.pdf" target="_blank">
+                            <i class="fas fa-file-pdf"></i> RESUME_V2
+                        </a>
+                    </div>
+                </div>
+
             </div>
             
-            <div class="footer-grid">
-                <div class="footer-cta">
-                    <h2>INITIATE<br>COMMUNICATION</h2>
-                    <a href="mailto:aman@example.com" class="email-link">AMAN@EXAMPLE.COM</a>
-                </div>
-                <div class="footer-links">
-                    <a href="https://github.com/amanudewal">GITHUB_REPO</a>
-                    <a href="https://www.linkedin.com/in/aman-udewal/">LINKEDIN_PROFILE</a>
-                    <a href="assets/Aman_Resume.pdf">RESUME_V2</a>
+            <div class="marquee-container reverse">
+                <div class="marquee-content">
+                    ENGINEERED BY AMAN UDEWAL /// 2026 /// ENGINEERED BY AMAN UDEWAL /// 2026 ///
                 </div>
             </div>
         </section>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PROJECT: MENTAL_HEALTH_AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body data-theme="dark">
+    <!-- Cursor MUST be present for script.js to find it -->
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+    <div class="bg-grid"></div>
+    
+    <header class="fixed-header">
+        <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
+        <nav>
+            <a href="index.html" class="nav-item">BACK_TO_HQ [ESC]</a>
+            <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="project-hero">
+            <h1 class="project-title glitch-title">MENTAL HEALTH <br> AI SYSTEM</h1>
+            <div class="project-meta">
+                <span>// HEALTHCARE</span>
+                <span>// FLUTTER</span>
+                <span>// SIH 2025</span>
+            </div>
+        </section>
+
+        <section class="project-content">
+            <div class="content-block">
+                <h3>THE CHALLENGE</h3>
+                <p>
+                    Students face immense academic pressure, yet access to immediate psychological support is often limited or stigmatized. We needed a discreet, accessible, and intelligent platform to bridge the gap between students and mental health resources.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>THE SOLUTION</h3>
+                <p>
+                    We developed a cross-platform mobile ecosystem. The core is an <strong>NLP-powered Chatbot</strong> trained on psychological first-aid datasets to offer immediate, empathetic conversations. The app also features a secure journaling system, mood tracking analytics visualization, and a geo-location directory for nearby clinics.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>TECH ARSENAL</h3>
+                <div class="tech-grid">
+                    <div class="tech-item">FLUTTER</div>
+                    <div class="tech-item">DART</div>
+                    <div class="tech-item">FIREBASE</div>
+                    <div class="tech-item">BERT (NLP)</div>
+                    <div class="tech-item">GOOGLE MAPS API</div>
+                </div>
+            </div>
+            
+            <div class="content-block" style="text-align: center; margin-top: 80px;">
+                <a href="#" class="cyber-btn">VIEW SOURCE CODE <i class="fab fa-github"></i></a>
+            </div>
+        </section>
+    </main>
+    
+    <script type="module" src="script.js"></script>
+</body>
+</html>

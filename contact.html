@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMM_HUB // AMAN.SYS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body data-theme="dark">
+
+    <div class="bg-grid"></div>
+    
+    <header class="fixed-header">
+        <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
+        <nav>
+            <a href="index.html" class="nav-item">BACK_TO_HOME [ESC]</a>
+        </nav>
+    </header>
+
+    <main class="comm-hub">
+        
+        <!-- PANEL 1: EMAIL (Gmail Style) -->
+        <div class="comm-panel">
+            <div class="comm-header">
+                <i class="fas fa-envelope-open-text"></i>
+                <h2>SECURE MAIL RELAY</h2>
+            </div>
+            
+            <form class="email-form" id="emailForm">
+                <div class="form-group">
+                    <label>TO:</label>
+                    <input type="text" class="cyber-input" value="udewal.aman@gmail.com" readonly>
+                </div>
+                <div class="form-group">
+                    <label>SUBJECT:</label>
+                    <input type="text" id="emailSubject" class="cyber-input" placeholder="Project Inquiry / Collaboration">
+                </div>
+                <div class="form-group">
+                    <label>MESSAGE_BODY:</label>
+                    <textarea id="emailBody" class="cyber-input" placeholder="Initiating transmission..."></textarea>
+                </div>
+                <button type="submit" class="cyber-btn" style="width:100%">
+                    SEND TRANSMISSION
+                </button>
+            </form>
+        </div>
+
+        <!-- PANEL 2: WHATSAPP (Chat Style) -->
+        <div class="comm-panel">
+            <div class="comm-header">
+                <i class="fab fa-whatsapp"></i>
+                <h2>DIRECT UPLINK</h2>
+            </div>
+            
+            <div class="chat-interface">
+                <div class="chat-window">
+                    <div class="msg received">
+                        System: Connection Established.<br>
+                        Status: Online (Aman is likely available).<br>
+                        Type a message below to start a WhatsApp chat.
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="waMessage" class="cyber-input chat-input" placeholder="Type message...">
+                    <button id="waSend" class="cyber-btn" style="padding: 10px 20px;">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; text-align: center;">
+                <p style="font-size: 0.8rem; color: #666;">OR CALL DIRECTLY VIA SECURE LINE</p>
+                <a href="tel:+918767569330" class="cyber-btn" style="margin-top: 10px;">
+                    <i class="fas fa-phone-alt"></i> +91 87675 69330
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- EMAIL LOGIC ---
+        document.getElementById('emailForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const subject = document.getElementById('emailSubject').value;
+            const body = document.getElementById('emailBody').value;
+            window.location.href = `mailto:udewal.aman@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+
+        // --- WHATSAPP LOGIC ---
+        function sendWhatsApp() {
+            const msg = document.getElementById('waMessage').value;
+            if(msg.trim() === "") return;
+            
+            // Add user message to UI for effect
+            const chatWindow = document.querySelector('.chat-window');
+            const userBubble = document.createElement('div');
+            userBubble.className = 'msg sent';
+            userBubble.innerText = msg;
+            chatWindow.appendChild(userBubble);
+            
+            // Open API
+            setTimeout(() => {
+                window.open(`https://wa.me/918767569330?text=${encodeURIComponent(msg)}`, '_blank');
+            }, 500);
+        }
+
+        document.getElementById('waSend').addEventListener('click', sendWhatsApp);
+        document.getElementById('waMessage').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendWhatsApp();
+        });
+
+        // Animations
+        gsap.from(".comm-panel", {
+            y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power4.out"
+        });
+    </script>
+</body>
+</html>

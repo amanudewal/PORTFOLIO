@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PROJECT: CINEMATIC_GEN_AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body data-theme="dark">
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+    <div class="bg-grid"></div>
+    
+    <header class="fixed-header">
+        <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
+        <nav>
+            <a href="index.html" class="nav-item">BACK_TO_HQ [ESC]</a>
+            <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="project-hero">
+            <h1 class="project-title glitch-title">CINEMATIC <br> GENERATOR</h1>
+            <div class="project-meta">
+                <span>// GEN-AI</span>
+                <span>// STABLE DIFFUSION</span>
+                <span>// 2024</span>
+            </div>
+        </section>
+
+        <section class="project-content">
+            <div class="content-block">
+                <h3>THE CHALLENGE</h3>
+                <p>
+                    Standard text-to-image models often struggle with complex lighting scenarios (like Rembrandt lighting or silhouettes) and consistent character details. The goal was to create a specialized model for high-end cinematic portraiture.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>THE SOLUTION</h3>
+                <p>
+                    I utilized Low-Rank Adaptation (LoRA) to fine-tune Stable Diffusion 1.5 on a curated dataset of 500+ cinematic movie stills. The training process involved tagging images with specific lighting directions and camera angles. The result is a lightweight model capable of generating photorealistic portraits with specific lighting control via text prompts.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>TECH ARSENAL</h3>
+                <div class="tech-grid">
+                    <div class="tech-item">PYTHON</div>
+                    <div class="tech-item">PYTORCH</div>
+                    <div class="tech-item">STABLE DIFFUSION</div>
+                    <div class="tech-item">GRADIO UI</div>
+                    <div class="tech-item">LORA TRAINING</div>
+                </div>
+            </div>
+            
+            <div class="content-block" style="text-align: center; margin-top: 80px;">
+                <a href="#" class="cyber-btn">VIEW SOURCE CODE <i class="fab fa-github"></i></a>
+            </div>
+        </section>
+    </main>
+    
+    <script type="module" src="script.js"></script>
+</body>
+</html>
