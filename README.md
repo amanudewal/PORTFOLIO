@@ -1,56 +1,58 @@
 AMAN.SYS // V2.0 - 3D Cyber-Brutalist Portfolio
 
-🌐 Overview
+A high-performance, immersive developer portfolio designed with a Cyber-Brutalist aesthetic. This project fuses high-fidelity 3D rendering with kinetic typography, physics-based scroll animations, and a raw industrial design system to showcase work in AI, Media Forensics, and Mobile Architecture.
 
-AMAN.SYS is a high-performance, immersive developer portfolio designed with a Cyber-Brutalist aesthetic. It moves away from traditional clean designs to embrace raw industrial grids, kinetic typography, and a "terminal-chic" interface.
+🚀 Live Demo
 
-This project showcases my work as an AI Architect and Flutter Developer, featuring a fully interactive 3D hero section, physics-based scroll animations, and a robust dark/light theming system.
-
-Note: Replace 'https://www.google.com/search?q=assets/poster.png' with an actual screenshot of your site.
+[Insert your GitHub Pages Link Here]
 
 ⚡ Key Features
 
-3D Identity: An interactive 3D avatar rendered via Google's <model-viewer>, complete with mouse-tracking and environment lighting.
+3D Hero Identity: Interactive GLB avatar rendered via <model-viewer> with mouse-tracking capabilities and kinetic entry animations.
 
-Cyber-Void Aesthetic: A custom design system featuring deep navy backgrounds, acid green/electric cyan accents, and raw grid overlays.
+Cyber-Void Design System: A custom "Dark Mode" palette featuring Deep Navy (#030b16) and Electric Cyan (#00f3ff) accents.
 
 GSAP Motion Engine:
 
-Smooth Scroll: Heavy, physics-based scrolling for a premium feel.
+Smooth Scroll: Custom physics-based scrolling navigation using ScrollToPlugin.
 
-ScrollTriggers: Staggered text reveals and progress bars that animate as you explore.
+Staggered Reveals: Complex timeline animations triggered by scroll positions.
 
-Kinetic UI: Infinite marquees and magnetic cursor effects.
+Glitch Effects: Hover states and text animations that mimic digital noise.
 
-Dynamic Theming: One-click toggle between "System Dark" and "Clean Light" modes using advanced CSS variables.
+Communication Hub: A dedicated contact section featuring a "Buy Me a Coffee" style email composer and direct social links.
 
-Fully Responsive: Adaptive layouts that switch from complex grids on desktop to stacked, touch-friendly interfaces on mobile.
+Project Case Studies: Dedicated detail pages for individual projects (Deepfake Detector, Mental Health AI, Gen-AI).
+
+Dynamic Theming: Instant toggle between "System Dark" and "Clean Light" modes with localStorage persistence.
+
+Responsive Architecture: Fluid layouts that scale seamlessly from Mobile devices to 4K Desktops.
 
 🛠️ Technical Stack
 
-Category
+Component
 
 Technology
 
-Purpose
+Description
 
 Core
 
 HTML5, CSS3
 
-Semantic structure and variable-based styling
+Semantic markup and CSS Custom Properties (Variables)
 
 Logic
 
 JavaScript (ES6+)
 
-State management, loaders, and event handling
+Theme logic, loader sequences, and event handling
 
 3D Engine
 
 <model-viewer>
 
-Optimized WebGL rendering for GLB assets
+Google's web component for optimized glTF/GLB rendering
 
 Animation
 
@@ -62,33 +64,37 @@ Typography
 
 Google Fonts
 
-'Koulen' (Headings) & 'Space Mono' (Body)
+'Koulen' (Headers) & 'Space Mono' (Body)
 
 📂 Project Structure
 
 /
-├── index.html          # Main application structure & content
-├── style.css           # Visual styling, responsiveness, and theme definitions
-├── script.js           # GSAP animations, loader logic, and interactions
+├── index.html                  # Main landing page
+├── project-deepfake.html       # Case Study: Deepfake Detector
+├── project-mental-health.html  # Case Study: Mental Health AI
+├── project-gen-ai.html         # Case Study: Cinematic Gen AI
+├── style.css                   # Global styles & responsive logic
+├── script.js                   # Animations, Cursor, Loader & Theme logic
 └── assets/
-    └── model.glb       # 3D Character Model (Required)
+    ├── model.glb               # 3D Avatar file
+    ├── bg-music.mp3            # Background audio
+    └── Aman_Resume.pdf         # Resume file
 
 
+💻 How to Run Locally
 
-🚀 How to Run Locally
+If you want to view or edit this project on your machine, follow these steps.
 
-To view the 3D elements correctly, you must run this project on a local server (browsers block 3D models file access for security).
+Prerequisites: You need Git installed. You also need a local server (VS Code Live Server extension is recommended) because browsers block 3D models from loading directly due to CORS security policies.
 
-Clone the Repository:
+Clone the repository:
 
 git clone [https://github.com/amanudewal/PORTFOLIO.git](https://github.com/amanudewal/PORTFOLIO.git)
 
 
-
-Navigate to the Directory:
+Navigate to the directory:
 
 cd PORTFOLIO
-
 
 
 Start a Local Server:
@@ -101,8 +107,6 @@ Node.js: npx serve
 
 🎨 Customization Guide
 
-Want to use this template? Here is how to make it yours:
-
 Change Identity: Open index.html and replace "AMAN_UDEWAL" and the project details with your own.
 
 Swap the 3D Model:
@@ -113,10 +117,18 @@ Rename it to model.glb.
 
 Replace the file in the assets/ folder.
 
-Adjust Colors: Open style.css and modify the :root variables:
+Configure Contact:
 
-:root {
-    --accent: #ff0055; /* Change your main accent color */
-    --bg: #000000;     /* Change background color */
-}
+Open index.html and search for the <form id="emailForm">.
 
+Change the value inside window.location.href in script.js to your email address.
+
+📡 Contact
+
+GitHub: @amanudewal
+
+LinkedIn: Aman Ramakant Udewal
+
+Email: udewal.aman@gmail.com
+
+Engineered by Aman Ramakant Udewal © 2026
