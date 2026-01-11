@@ -6,6 +6,8 @@ AMAN.SYS is a high-performance, immersive developer portfolio designed with a Cy
 
 This project showcases my work as an AI Architect and Flutter Developer, featuring a fully interactive 3D hero section, physics-based scroll animations, and a robust dark/light theming system.
 
+Note: Replace 'https://www.google.com/search?q=assets/poster.png' with an actual screenshot of your site.
+
 ⚡ Key Features
 
 3D Identity: An interactive 3D avatar rendered via Google's <model-viewer>, complete with mouse-tracking and environment lighting.
@@ -72,6 +74,7 @@ Google Fonts
     └── model.glb       # 3D Character Model (Required)
 
 
+
 🚀 How to Run Locally
 
 To view the 3D elements correctly, you must run this project on a local server (browsers block 3D models file access for security).
@@ -81,9 +84,11 @@ Clone the Repository:
 git clone [https://github.com/amanudewal/PORTFOLIO.git](https://github.com/amanudewal/PORTFOLIO.git)
 
 
+
 Navigate to the Directory:
 
 cd PORTFOLIO
+
 
 
 Start a Local Server:
@@ -114,3 +119,4 @@ Adjust Colors: Open style.css and modify the :root variables:
     --accent: #ff0055; /* Change your main accent color */
     --bg: #000000;     /* Change background color */
 }
+
