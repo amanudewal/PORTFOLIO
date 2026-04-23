@@ -5,36 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AMAN.SYS | V2.0</title>
     
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
 
-    <!-- GSAP & ScrollTrigger -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- Model Viewer -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 </head>
 <body data-theme="dark">
 
-    <!-- Background Music -->
-    <audio id="bg-music" loop>
-        <source src="assets/bg-music.mp3" type="audio/mp3">
-    </audio>
+    <script>
+        (function() {
+            var localTheme = localStorage.getItem('portfolio-theme');
+            if (localTheme) { document.body.setAttribute('data-theme', localTheme); }
+        })();
+    </script>
 
-    <!-- Background Grid Effect -->
+    <audio id="bg-music" loop><source src="assets/bg-music.mp3" type="audio/mp3"></audio>
+    <audio id="hover-sound" src="assets/hover.mp3"></audio>
+    <audio id="click-sound" src="assets/click.mp3"></audio>
+
+    <canvas id="webgl-canvas"></canvas>
+
     <div class="bg-grid"></div>
     <div class="noise-overlay"></div>
 
-    <!-- Custom Cursor -->
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
-    <!-- Loader -->
+    <div class="sys-diagnostics">
+        <div class="diag-block">
+            <span>CPU_LOAD</span>
+            <div class="diag-bar-bg"><div class="diag-bar-fill" id="cpu-bar"></div></div>
+        </div>
+        <div class="diag-block">
+            <span>MEM_ALLOC</span>
+            <div class="diag-bar-bg"><div class="diag-bar-fill" id="mem-bar"></div></div>
+        </div>
+    </div>
+
+    <div class="ai-widget-container">
+        <button id="ai-toggle"><i class="fas fa-robot"></i> SYS_AI</button>
+        <div class="ai-chat-panel" id="ai-panel">
+            <div class="ai-header">AMAN.AI // AGENT_ONLINE</div>
+            <div class="ai-body" id="ai-chat-log">
+                <p class="ai-msg">System AI initialized. Ask me about Aman's skills, projects, or resume.</p>
+            </div>
+            <div class="ai-input-area">
+                <span>></span>
+                <input type="text" id="ai-input" placeholder="Query system..." autocomplete="off">
+            </div>
+        </div>
+    </div>
+
     <div id="loader">
         <div class="sys-loading">
             <div class="blink-text">SYSTEM BOOT_SEQUENCE</div>
@@ -45,7 +81,6 @@
         </div>
     </div>
 
-    <!-- Fixed Header -->
     <header class="fixed-header">
         <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
         <div class="status-indicator">
@@ -54,8 +89,10 @@
         <nav>
             <a href="#hero" class="nav-item">HOME [01]</a>
             <a href="#about" class="nav-item">DATA [02]</a>
-            <a href="#work" class="nav-item">WORK [03]</a>
-            <a href="#contact" class="nav-item highlight">COMM_HUB [04]</a>
+            <a href="#experience" class="nav-item">LOG [03]</a>
+            <a href="#work" class="nav-item">WORK [04]</a>
+            <a href="#contact" class="nav-item highlight">COMM_HUB [05]</a>
+            <button id="color-cycle" class="nav-item toggle-btn">OVERCLOCK [CYAN]</button>
             <button id="sound-toggle" class="nav-item toggle-btn">SOUND [OFF]</button>
             <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
         </nav>
@@ -63,7 +100,6 @@
 
     <main>
 
-        <!-- HERO SECTION -->
         <section id="hero">
             <div class="hero-grid">
                 <div class="hero-content">
@@ -76,13 +112,21 @@
                         <span class="hollow">REALITY</span> <br>
                         ENGINEER
                     </h1>
-                    <p class="terminal-text">
-                        > INITIATING NEURAL_NETWORKS...<br>
-                        > OPTIMIZING FLUTTER_PIPELINES...<br>
-                        > TARGET: GATE_2026
-                    </p>
                     
-                    <a href="#work" class="cyber-btn">
+                    <div class="interactive-terminal" id="hero-terminal" onclick="document.getElementById('cli-input').focus()">
+                        <div id="cli-output">
+                            > INITIATING NEURAL_NETWORKS...<br>
+                            > OPTIMIZING FLUTTER_PIPELINES...<br>
+                            > TARGET: GATE_2026<br>
+                            > Type 'help' to see available commands.
+                        </div>
+                        <div class="cli-input-line">
+                            <span class="cli-prompt">visitor@aman.sys:~$</span>
+                            <input type="text" id="cli-input" autocomplete="off" spellcheck="false">
+                        </div>
+                    </div>
+                    
+                    <a href="#work" class="cyber-btn" style="margin-top: 30px;">
                         <span class="btn-text">INITIALIZE PROTOCOL</span>
                         <span class="btn-glitch"></span>
                     </a>
@@ -90,12 +134,6 @@
 
                 <div class="hero-visual">
                     <div class="scanner-frame">
-                        <div class="scan-line"></div>
-                        <div class="corner tl"></div>
-                        <div class="corner tr"></div>
-                        <div class="corner bl"></div>
-                        <div class="corner br"></div>
-                        
                         <model-viewer 
                             id="hero-avatar"
                             src="assets/model.glb" 
@@ -107,7 +145,9 @@
                             disable-zoom disable-pan disable-tap
                             environment-image="neutral"
                             autoplay
+                            animation-name="Idle"
                             field-of-view="30deg"
+                            class="model-avatar"
                         ></model-viewer>
                     </div>
                     <div class="model-caption">
@@ -124,7 +164,6 @@
             </div>
         </section>
 
-        <!-- ABOUT / SKILLS -->
         <section id="about">
             <div class="section-border-top"></div>
             <div class="split-layout">
@@ -137,8 +176,14 @@
                         crafting 60FPS fluid interfaces in Flutter.
                     </p>
                     <div class="stats-grid">
-                        <div class="stat-box"><h3>03+</h3><span>YEARS_EXP</span></div>
-                        <div class="stat-box"><h3>10+</h3><span>DEPLOYMENTS</span></div>
+                        <div class="stat-box">
+                            <h3>03+</h3>
+                            <span>YEARS_EXP</span>
+                        </div>
+                        <div class="stat-box">
+                            <h3 id="gh-repos">--</h3>
+                            <span>GITHUB_REPOS</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -154,14 +199,55 @@
             </div>
         </section>
 
-        <!-- PROJECTS -->
+        <section id="experience">
+            <div class="section-border-top"></div>
+            <div style="text-align: center; margin-top: 60px;">
+                <h2 class="section-header">SYSTEM_LOG: EXPERIENCE</h2>
+            </div>
+            <div class="timeline">
+                <div class="line"></div>
+                <div class="timeline-item">
+                    <div class="dot"></div>
+                    <div class="content">
+                        <h3>2026 (Expected)</h3>
+                        <h4>Sandipani Technical Campus</h4>
+                        <p>B.E. Computer Engineering // Latur</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="dot"></div>
+                    <div class="content">
+                        <h3>2022</h3>
+                        <h4>Reliance College</h4>
+                        <p>Higher Secondary Education // Latur</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="dot"></div>
+                    <div class="content">
+                        <h3>2020</h3>
+                        <h4>ShriDeshikendra Vidyalaya</h4>
+                        <p>Secondary Education // Latur</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="work">
             <div class="section-border-top"></div>
             <div class="container">
                 <h2 class="section-header big" style="padding: 40px;">SELECTED_WORKS</h2>
                 
+                <div class="filter-chips">
+                    <button class="chip active" data-filter="all">All</button>
+                    <button class="chip" data-filter="AI">AI</button>
+                    <button class="chip" data-filter="Mobile">Mobile</button>
+                    <button class="chip" data-filter="WebGL">WebGL</button>
+                </div>
+
                 <div class="project-catalog">
-                    <div class="catalog-item">
+                    
+                    <div class="catalog-item" data-category="AI">
                         <div class="cat-id">001</div>
                         <div class="cat-info">
                             <h3>DEEPFAKE_DETECTOR</h3>
@@ -170,7 +256,8 @@
                         </div>
                         <div class="cat-action"><a href="project-deepfake.html"><i class="fas fa-arrow-right"></i></a></div>
                     </div>
-                    <div class="catalog-item">
+                    
+                    <div class="catalog-item" data-category="Mobile AI">
                         <div class="cat-id">002</div>
                         <div class="cat-info">
                             <h3>MENTAL_HEALTH_AI</h3>
@@ -179,7 +266,8 @@
                         </div>
                         <div class="cat-action"><a href="project-mental-health.html"><i class="fas fa-arrow-right"></i></a></div>
                     </div>
-                    <div class="catalog-item">
+                    
+                    <div class="catalog-item" data-category="AI">
                         <div class="cat-id">003</div>
                         <div class="cat-info">
                             <h3>CINEMATIC_GEN_AI</h3>
@@ -188,11 +276,59 @@
                         </div>
                         <div class="cat-action"><a href="project-gen-ai.html"><i class="fas fa-arrow-right"></i></a></div>
                     </div>
+                    
+                    <div class="catalog-item" data-category="Mobile AI">
+                        <div class="cat-id">004</div>
+                        <div class="cat-info">
+                            <h3>OFFLINE_AI_ASSISTANT</h3>
+                            <p>LOCAL LLM & PIPER TTS HYBRID</p>
+                            <div class="tags"><span>Llama 3</span> / <span>FLUTTER</span> / <span>PYTHON</span></div>
+                        </div>
+                        <div class="cat-action"><a href="project-offline-ai.html"><i class="fas fa-arrow-right"></i></a></div>
+                    </div>
+                    
+                    <div class="catalog-item" data-category="Mobile">
+                        <div class="cat-id">005</div>
+                        <div class="cat-info">
+                            <h3>MINDFUL_AI_APP</h3>
+                            <p>FIREBASE SOCIAL AUTH & RIVE UI</p>
+                            <div class="tags"><span>FLUTTER</span> / <span>FIREBASE</span> / <span>UI/UX</span></div>
+                        </div>
+                        <div class="cat-action"><a href="project-mindful-app.html"><i class="fas fa-arrow-right"></i></a></div>
+                    </div>
+                    
+                    <div class="catalog-item" data-category="WebGL">
+                        <div class="cat-id">006</div>
+                        <div class="cat-info">
+                            <h3>3D_CYBER_PORTFOLIO</h3>
+                            <p>WEBGL BRUTALIST ARCHITECTURE</p>
+                            <div class="tags"><span>THREE.JS</span> / <span>GSAP</span> / <span>CSS</span></div>
+                        </div>
+                        <div class="cat-action"><a href="project-cyber-portfolio.html"><i class="fas fa-arrow-right"></i></a></div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT HUB -->
+        <section id="testimonials">
+            <h2 class="section-header big">WHAT PEOPLE SAY</h2>
+            <div class="carousel">
+                <div class="slide active">
+                    <p class="quote">“A mind‑blowing blend of art & tech – the 3D avatar feels alive.”</p>
+                    <span class="author">— Alex R., Creative Director</span>
+                </div>
+                <div class="slide">
+                    <p class="quote">“The offline AI assistant is a game‑changer for privacy‑first workflows.”</p>
+                    <span class="author">— Maya K., AI Engineer</span>
+                </div>
+                <div class="slide">
+                    <p class="quote">“Your UI feels like a cyber‑punk dashboard – pure premium vibes.”</p>
+                    <span class="author">— Luis P., Front‑end Lead</span>
+                </div>
+            </div>
+        </section>
+
         <section id="contact">
             <div class="section-border-top"></div>
             
@@ -202,25 +338,23 @@
 
             <div class="comm-hub">
                 
-                <!-- LEFT: EMAIL PANEL (BUY ME A COFFEE) -->
                 <div class="comm-panel">
                     <div class="comm-header">
                         <i class="fas fa-coffee"></i>
                         <h2>BUY ME A COFFEE</h2>
                     </div>
-                    
-                    <form class="email-form" id="emailForm">
+                    <form class="email-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
                         <div class="form-group">
-                            <label>TO:</label>
-                            <input type="text" class="cyber-input" value="udewal.aman@gmail.com" readonly>
+                            <label>YOUR EMAIL:</label>
+                            <input type="email" name="email" class="cyber-input" placeholder="so-i-can-reply@example.com" required>
                         </div>
                         <div class="form-group">
                             <label>SUBJECT:</label>
-                            <input type="text" id="emailSubject" class="cyber-input" placeholder="Project Idea / Just a Hello">
+                            <input type="text" name="subject" class="cyber-input" placeholder="Project Idea / Just a Hello" required>
                         </div>
                         <div class="form-group">
                             <label>MESSAGE:</label>
-                            <textarea id="emailBody" class="cyber-input" placeholder="Let's build something awesome..."></textarea>
+                            <textarea name="message" class="cyber-input" placeholder="Let's build something awesome..." required></textarea>
                         </div>
                         <button type="submit" class="cyber-btn" style="width:100%; margin-top:10px;">
                             SEND MESSAGE
@@ -228,18 +362,11 @@
                     </form>
                 </div>
 
-                <!-- RIGHT: SOCIAL LINKS (Simple) -->
                 <div class="links-panel">
                     <div class="footer-links">
-                        <a href="https://github.com/amanudewal" target="_blank">
-                            <i class="fab fa-github"></i> GITHUB_REPO
-                        </a>
-                        <a href="https://www.linkedin.com/in/aman-udewal/" target="_blank">
-                            <i class="fab fa-linkedin"></i> LINKEDIN_PROFILE
-                        </a>
-                        <a href="assets/Aman_Resume.pdf?v=2" target="_blank">
-                            <i class="fas fa-file-pdf"></i> RESUME_V2
-                        </a>
+                        <a href="https://github.com/amanudewal" target="_blank"><i class="fab fa-github"></i> GITHUB_REPO</a>
+                        <a href="https://www.linkedin.com/in/aman-udewal/" target="_blank"><i class="fab fa-linkedin"></i> LINKEDIN_PROFILE</a>
+                        <a href="assets/Aman_Resume.pdf?v=3" target="_blank"><i class="fas fa-file-pdf"></i> RESUME_V2</a>
                     </div>
                 </div>
 
@@ -252,8 +379,12 @@
             </div>
         </section>
 
+        <button id="back-to-top" aria-label="Back to top">
+            <i class="fas fa-chevron-up"></i>
+        </button>
     </main>
+    
+    <script src="script.js"></script>
 
-    <script type="module" src="script.js"></script>
 </body>
 </html>

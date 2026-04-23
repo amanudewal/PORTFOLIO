@@ -2,70 +2,129 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROJECT: MENTAL_HEALTH_AI</title>
+    
+    <meta name="description" content="Cross-platform NLP chatbot ecosystem for mental wellness.">
+    <meta property="og:title" content="MENTAL HEALTH AI – Portfolio">
+    <meta property="og:description" content="Cross-platform NLP chatbot ecosystem for mental wellness.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amanudewal.github.io/PORTFOLIO/project-mental-health.html">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
     <link rel="stylesheet" href="style.css">
     
-    <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body data-theme="dark">
-    <!-- Cursor MUST be present for script.js to find it -->
+
+    <script>
+        (function() {
+            var localTheme = localStorage.getItem('portfolio-theme');
+            if (localTheme) { document.body.setAttribute('data-theme', localTheme); }
+        })();
+    </script>
+
+    <audio id="bg-music" loop><source src="assets/bg-music.mp3" type="audio/mp3"></audio>
+    <audio id="hover-sound" src="assets/hover.mp3"></audio>
+    <audio id="click-sound" src="assets/click.mp3"></audio>
+
+    <canvas id="webgl-canvas"></canvas>
+
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
     <div class="bg-grid"></div>
+    <div class="noise-overlay"></div>
+    
+    <div class="sys-diagnostics">
+        <div class="diag-block">
+            <span>CPU_LOAD</span>
+            <div class="diag-bar-bg"><div class="diag-bar-fill" id="cpu-bar"></div></div>
+        </div>
+        <div class="diag-block">
+            <span>MEM_ALLOC</span>
+            <div class="diag-bar-bg"><div class="diag-bar-fill" id="mem-bar"></div></div>
+        </div>
+    </div>
+
+    <div class="ai-widget-container">
+        <button id="ai-toggle"><i class="fas fa-robot"></i> SYS_AI</button>
+        <div class="ai-chat-panel" id="ai-panel">
+            <div class="ai-header">AMAN.AI // AGENT_ONLINE</div>
+            <div class="ai-body" id="ai-chat-log">
+                <p class="ai-msg">System AI initialized. Ask me about Aman's skills, projects, or resume.</p>
+            </div>
+            <div class="ai-input-area">
+                <span>></span>
+                <input type="text" id="ai-input" placeholder="Query system..." autocomplete="off">
+            </div>
+        </div>
+    </div>
     
     <header class="fixed-header">
         <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
         <nav>
             <a href="index.html" class="nav-item">BACK_TO_HQ [ESC]</a>
+            <button id="color-cycle" class="nav-item toggle-btn">OVERCLOCK [CYAN]</button>
+            <button id="sound-toggle" class="nav-item toggle-btn">SOUND [OFF]</button>
             <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
         </nav>
     </header>
 
     <main>
-        <section class="project-hero">
-            <h1 class="project-title glitch-title">MENTAL HEALTH <br> AI SYSTEM</h1>
-            <div class="project-meta">
-                <span>// HEALTHCARE</span>
-                <span>// FLUTTER</span>
-                <span>// SIH 2025</span>
-            </div>
-        </section>
-
-        <section class="project-content">
-            <div class="content-block">
-                <h3>THE CHALLENGE</h3>
-                <p>
-                    Students face immense academic pressure, yet access to immediate psychological support is often limited or stigmatized. We needed a discreet, accessible, and intelligent platform to bridge the gap between students and mental health resources.
-                </p>
-            </div>
-
-            <div class="content-block">
-                <h3>THE SOLUTION</h3>
-                <p>
-                    We developed a cross-platform mobile ecosystem. The core is an <strong>NLP-powered Chatbot</strong> trained on psychological first-aid datasets to offer immediate, empathetic conversations. The app also features a secure journaling system, mood tracking analytics visualization, and a geo-location directory for nearby clinics.
-                </p>
-            </div>
-
-            <div class="content-block">
-                <h3>TECH ARSENAL</h3>
-                <div class="tech-grid">
-                    <div class="tech-item">FLUTTER</div>
-                    <div class="tech-item">DART</div>
-                    <div class="tech-item">FIREBASE</div>
-                    <div class="tech-item">BERT (NLP)</div>
-                    <div class="tech-item">GOOGLE MAPS API</div>
+        <section class="project-dashboard">
+            <div class="dashboard-header">
+                <h1 class="project-title glitch-title">MINDEASE <br> AI SYSTEM</h1>
+                <div class="tech-hud">
+                    <span class="hud-tag">FLUTTER</span>
+                    <span class="hud-tag">NLP</span>
+                    <span class="hud-tag">SIH 2025</span>
                 </div>
             </div>
-            
-            <div class="content-block" style="text-align: center; margin-top: 80px;">
-                <a href="#" class="cyber-btn">VIEW SOURCE CODE <i class="fab fa-github"></i></a>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <h4>THE_OBJECTIVE</h4>
+                    <p>Students face immense academic pressure, yet access to immediate psychological support is often stigmatized. We needed a discreet, highly accessible, and intelligent cross-platform mobile application to bridge the gap between students and mental health resources.</p>
+                </div>
+                <div class="data-card">
+                    <h4>CORE_SYSTEM_LOGIC</h4>
+                    <p>The core of the application relies on an NLP-powered conversational agent. By integrating BERT models, the system processes user input to detect emotional sentiment and provides empathetic, psychologically-safe responses or escalates to professional booking when necessary.</p>
+                </div>
+                <div class="data-card">
+                    <h4>UX_EXECUTION</h4>
+                    <p>Crafted a fluid 60FPS frontend using Flutter and Dart. The application synchronizes with a Python Flask backend and Firebase to maintain secure journaling, realtime chat logs, and a geolocation directory for nearby clinics.</p>
+                </div>
+            </div>
+
+            <div class="dashboard-header" style="border:none; margin-top:80px; padding-bottom: 0;">
+                <h2 style="font-family:'Koulen', sans-serif; font-size: 3rem; color: var(--accent);">TECH_ARSENAL</h2>
+                <div class="tech-hud" style="margin-top:20px;">
+                    <span class="hud-tag">FLUTTER / DART</span>
+                    <span class="hud-tag">PYTHON FLASK</span>
+                    <span class="hud-tag">FIREBASE</span>
+                    <span class="hud-tag">BERT (NLP)</span>
+                    <span class="hud-tag">REST APIs</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px; text-align: center;">
+                 <a href="https://github.com/amanudewal/" target="_blank" class="cyber-btn">
+                    ACCESS SOURCE CODE <i class="fab fa-github" style="margin-left:10px;"></i>
+                </a>
             </div>
         </section>
+
+        <button id="back-to-top" aria-label="Back to top">
+            <i class="fas fa-chevron-up"></i>
+        </button>
     </main>
     
-    <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>

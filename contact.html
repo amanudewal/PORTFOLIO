@@ -6,6 +6,7 @@
     <title>COMM_HUB // AMAN.SYS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body data-theme="dark">
@@ -78,8 +79,10 @@
             </div>
         </div>
 
+        <button id="back-to-top" class="cyber-link-btn" aria-label="Back to top">↑ TOP</button>
     </main>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTo.min.js"></script>
     <script>
         // --- EMAIL LOGIC ---
         document.getElementById('emailForm').addEventListener('submit', (e) => {
@@ -112,10 +115,14 @@
             if (e.key === 'Enter') sendWhatsApp();
         });
 
-        // Animations
-        gsap.from(".comm-panel", {
-            y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power4.out"
-        });
+        // Animations - check if GSAP is loaded
+        if (typeof gsap !== "undefined") {
+            gsap.from(".comm-panel", {
+                y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power4.out"
+            });
+        }
     </script>
+    <script src="script.js"></script>
+
 </body>
 </html>

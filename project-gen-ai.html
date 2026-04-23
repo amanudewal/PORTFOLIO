@@ -2,69 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROJECT: CINEMATIC_GEN_AI</title>
+    
+    <meta name="description" content="Stable Diffusion LoRA pipeline for cinematic generation.">
+    <meta property="og:title" content="CINEMATIC GEN AI – Portfolio">
+    <meta property="og:description" content="Stable Diffusion LoRA pipeline for cinematic generation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amanudewal.github.io/PORTFOLIO/project-gen-ai.html">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
     <link rel="stylesheet" href="style.css">
     
-    <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-<body data-theme="dark">
+<body data-theme="light">
+
+    <script>
+        (function() {
+            var localTheme = localStorage.getItem('portfolio-theme');
+            if (localTheme) { document.body.setAttribute('data-theme', localTheme); }
+        })();
+    </script>
+
+    <audio id="bg-music" loop><source src="assets/bg-music.mp3" type="audio/mp3"></audio>
+    <audio id="hover-sound" src="assets/hover.mp3"></audio>
+    <audio id="click-sound" src="assets/click.mp3"></audio>
+
+    <canvas id="webgl-canvas"></canvas>
+
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
     <div class="bg-grid"></div>
+    <div class="noise-overlay"></div>
+
+    <div class="sys-diagnostics">
+        <div class="diag-block">
+            <span>CPU_LOAD</span>
+            <div class="diag-bar-bg"><div class="diag-bar-fill" id="cpu-bar"></div></div>
+        </div>
+        <div class="diag-block">
+            <span>MEM_ALLOC</span>
+            <div class="diag-bar-bg"><div class="diag-bar-fill" id="mem-bar"></div></div>
+        </div>
+    </div>
+
+    <div class="ai-widget-container">
+        <button id="ai-toggle"><i class="fas fa-robot"></i> SYS_AI</button>
+        <div class="ai-chat-panel" id="ai-panel">
+            <div class="ai-header">AMAN.AI // AGENT_ONLINE</div>
+            <div class="ai-body" id="ai-chat-log">
+                <p class="ai-msg">System AI initialized. Ask me about Aman's skills, projects, or resume.</p>
+            </div>
+            <div class="ai-input-area">
+                <span>></span>
+                <input type="text" id="ai-input" placeholder="Query system..." autocomplete="off">
+            </div>
+        </div>
+    </div>
     
     <header class="fixed-header">
         <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
         <nav>
             <a href="index.html" class="nav-item">BACK_TO_HQ [ESC]</a>
+            <button id="color-cycle" class="nav-item toggle-btn">OVERCLOCK [CYAN]</button>
+            <button id="sound-toggle" class="nav-item toggle-btn">SOUND [OFF]</button>
             <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
         </nav>
     </header>
 
     <main>
-        <section class="project-hero">
-            <h1 class="project-title glitch-title">CINEMATIC <br> GENERATOR</h1>
-            <div class="project-meta">
-                <span>// GEN-AI</span>
-                <span>// STABLE DIFFUSION</span>
-                <span>// 2024</span>
-            </div>
-        </section>
-
-        <section class="project-content">
-            <div class="content-block">
-                <h3>THE CHALLENGE</h3>
-                <p>
-                    Standard text-to-image models often struggle with complex lighting scenarios (like Rembrandt lighting or silhouettes) and consistent character details. The goal was to create a specialized model for high-end cinematic portraiture.
-                </p>
-            </div>
-
-            <div class="content-block">
-                <h3>THE SOLUTION</h3>
-                <p>
-                    I utilized Low-Rank Adaptation (LoRA) to fine-tune Stable Diffusion 1.5 on a curated dataset of 500+ cinematic movie stills. The training process involved tagging images with specific lighting directions and camera angles. The result is a lightweight model capable of generating photorealistic portraits with specific lighting control via text prompts.
-                </p>
-            </div>
-
-            <div class="content-block">
-                <h3>TECH ARSENAL</h3>
-                <div class="tech-grid">
-                    <div class="tech-item">PYTHON</div>
-                    <div class="tech-item">PYTORCH</div>
-                    <div class="tech-item">STABLE DIFFUSION</div>
-                    <div class="tech-item">GRADIO UI</div>
-                    <div class="tech-item">LORA TRAINING</div>
+        <section class="project-dashboard">
+            <div class="dashboard-header">
+                <h1 class="project-title glitch-title">CINEMATIC <br> GENERATOR</h1>
+                <div class="tech-hud">
+                    <span class="hud-tag">GENERATIVE AI</span>
+                    <span class="hud-tag">STABLE DIFFUSION</span>
+                    <span class="hud-tag">LORA</span>
                 </div>
             </div>
-            
-            <div class="content-block" style="text-align: center; margin-top: 80px;">
-                <a href="#" class="cyber-btn">VIEW SOURCE CODE <i class="fab fa-github"></i></a>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <h4>THE_OBJECTIVE</h4>
+                    <p>Standard text-to-image models struggle to maintain consistent lighting, specific camera angles, and high-fidelity cinematic styling across multiple generations. The objective was to build a tailored pipeline that specifically generates professional-grade, cinematic portraiture.</p>
+                </div>
+                <div class="data-card">
+                    <h4>CORE_SYSTEM_LOGIC</h4>
+                    <p>Implemented Low-Rank Adaptation (LoRA) to fine-tune a Stable Diffusion base model. I curated a specific dataset of cinematic stills, tagged them with specialized lighting and composition metadata, and trained the model to understand complex prompt weights.</p>
+                </div>
+                <div class="data-card">
+                    <h4>UX_EXECUTION</h4>
+                    <p>Wrapped the underlying PyTorch inference engine in a clean Gradio web interface. This allows users to easily input prompts, adjust CFG scales, and tweak sampling steps without needing to interact directly with the command-line interface.</p>
+                </div>
+            </div>
+
+            <div class="dashboard-header" style="border:none; margin-top:80px; padding-bottom: 0;">
+                <h2 style="font-family:'Koulen', sans-serif; font-size: 3rem; color: var(--accent);">TECH_ARSENAL</h2>
+                <div class="tech-hud" style="margin-top:20px;">
+                    <span class="hud-tag">PYTHON / PYTORCH</span>
+                    <span class="hud-tag">STABLE DIFFUSION</span>
+                    <span class="hud-tag">GRADIO UI</span>
+                    <span class="hud-tag">LORA TRAINING</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px; text-align: center;">
+                <a href="https://github.com/amanudewal" target="_blank" class="cyber-btn">
+                    ACCESS SOURCE CODE <i class="fab fa-github" style="margin-left:10px;"></i>
+                </a>
             </div>
         </section>
+
+        <button id="back-to-top" aria-label="Back to top">
+            <i class="fas fa-chevron-up"></i>
+        </button>
     </main>
     
-    <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>

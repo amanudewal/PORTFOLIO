@@ -1,0 +1,18 @@
+/* variables.css – design tokens */
+:root {
+  /* Colors */
+  --bg:        #0a0a0a;
+  --surface:   #111111;
+  --text:      #e0e0e0;
+  --accent:    #00f3ff;
+  --border:    rgba(255,255,255,0.1);
+
+  /* Typography */
+  --font-primary: 'Koulen', sans-serif;
+  --font-mono:    'Space Mono', monospace;
+
+  /* Spacing */
+  --gap-sm: 0.5rem;
+  --gap-md: 1rem;
+  --gap-lg: 2rem;
+}
