@@ -1,134 +1,62 @@
-AMAN.SYS // V2.0 - 3D Cyber-Brutalist Portfolio
+<div align="center">
 
-A high-performance, immersive developer portfolio designed with a Cyber-Brutalist aesthetic. This project fuses high-fidelity 3D rendering with kinetic typography, physics-based scroll animations, and a raw industrial design system to showcase work in AI, Media Forensics, and Mobile Architecture.
+<h1>𝐀𝐌𝐀𝐍.𝐒𝐘𝐒 // 𝐕𝟐.𝟓</h1>
 
-🚀 Live Demo
+**Advanced Cyber-Brutalist Developer Portfolio & OS Simulation**
 
-[Insert your GitHub Pages Link Here]
+[![Live Demo](https://img.shields.io/badge/LAUNCH_LIVE_SITE-00f3ff?style=for-the-badge&logo=googlechrome&logoColor=black)](https://amanudewal.github.io/PORTFOLIO/)
 
-⚡ Key Features
+[![Version](https://img.shields.io/badge/Version-2.5-8a2be2?style=flat-square)]()
+[![Status](https://img.shields.io/badge/System-ONLINE-00f3ff?style=flat-square)]()
+[![License](https://img.shields.io/badge/License-MIT-ff003c?style=flat-square)]()
 
-3D Hero Identity: Interactive GLB avatar rendered via <model-viewer> with mouse-tracking capabilities and kinetic entry animations.
+</div>
 
-Cyber-Void Design System: A custom "Dark Mode" palette featuring Deep Navy (#030b16) and Electric Cyan (#00f3ff) accents.
+<br>
 
-GSAP Motion Engine:
+> **SYSTEM_LOG:** A high-performance, immersive developer portfolio designed with a raw, interactive Cyber-Brutalist aesthetic. This project acts as a literal "Operating System" in the browser, fusing high-fidelity 3D rendering, WebGL particles, a functional command-line interface, and an embedded AI widget to showcase work in AI, Media Forensics, and Mobile Architecture.
 
-Smooth Scroll: Custom physics-based scrolling navigation using ScrollToPlugin.
+---
 
-Staggered Reveals: Complex timeline animations triggered by scroll positions.
+### ⚡ CORE ARCHITECTURE & FEATURES
 
-Glitch Effects: Hover states and text animations that mimic digital noise.
+- 🖥️ **Interactive Terminal (CLI):** A functional command-line interface. Type commands like `help`, `skills.exe`, and `download resume`.
+- 🤖 **Embedded AI Assistant (SYS_AI):** A stealthy cyber-HUD widget that simulates an NLP agent to answer queries.
+- 📊 **Live Diagnostics HUD:** Dynamic CPU and Memory allocation bars that spike based on user interaction.
+- ✨ **WebGL Particle Engine:** Interactive, mouse-tracking 3D particles powered by `Three.js` that adapt to the active theme.
+- 🎨 **System Overclock (Color Protocol):** Instantly hot-swap the primary system accent color (Cyan, Ultraviolet, Plasma, Override).
+- 👁️ **Advanced Visitor Telemetry:** Stealth tracking protocol pushing OS, location, and IP alerts to a mobile device via `ntfy.sh`.
+- 🗿 **3D Hero Identity:** Interactive GLB avatar rendered via `<model-viewer>`.
+- 🔊 **Audio Architecture:** Integrated UI sound design with mechanical hover/click states.
 
-Communication Hub: A dedicated contact section featuring a "Buy Me a Coffee" style email composer and direct social links.
+---
 
-Project Case Studies: Dedicated detail pages for individual projects (Deepfake Detector, Mental Health AI, Gen-AI).
+### 🛠️ TECH ARSENAL
 
-Dynamic Theming: Instant toggle between "System Dark" and "Clean Light" modes with localStorage persistence.
+<div align="center">
+  
+  ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
+  ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+  ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
+  ![Threejs](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)
+  ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+  ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+  ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+  
+</div>
 
-Responsive Architecture: Fluid layouts that scale seamlessly from Mobile devices to 4K Desktops.
+---
 
-🛠️ Technical Stack
+### 📂 SYSTEM DIRECTORY
 
-Component
-
-Technology
-
-Description
-
-Core
-
-HTML5, CSS3
-
-Semantic markup and CSS Custom Properties (Variables)
-
-Logic
-
-JavaScript (ES6+)
-
-Theme logic, loader sequences, and event handling
-
-3D Engine
-
-<model-viewer>
-
-Google's web component for optimized glTF/GLB rendering
-
-Animation
-
-GSAP 3
-
-GreenSock Animation Platform (Core + ScrollTrigger + ScrollTo)
-
-Typography
-
-Google Fonts
-
-'Koulen' (Headers) & 'Space Mono' (Body)
-
-📂 Project Structure
-
-/
-├── index.html                  # Main landing page
+```bash
+AMAN.SYS/
+├── index.html                  # Main OS Dashboard
 ├── project-deepfake.html       # Case Study: Deepfake Detector
 ├── project-mental-health.html  # Case Study: Mental Health AI
 ├── project-gen-ai.html         # Case Study: Cinematic Gen AI
-├── style.css                   # Global styles & responsive logic
-├── script.js                   # Animations, Cursor, Loader & Theme logic
-└── assets/
-    ├── model.glb               # 3D Avatar file
-    ├── bg-music.mp3            # Background audio
-    └── Aman_Resume.pdf         # Resume file
-
-
-💻 How to Run Locally
-
-If you want to view or edit this project on your machine, follow these steps.
-
-Prerequisites: You need Git installed. You also need a local server (VS Code Live Server extension is recommended) because browsers block 3D models from loading directly due to CORS security policies.
-
-Clone the repository:
-
-git clone [https://github.com/amanudewal/PORTFOLIO.git](https://github.com/amanudewal/PORTFOLIO.git)
-
-
-Navigate to the directory:
-
-cd PORTFOLIO
-
-
-Start a Local Server:
-
-VS Code: Right-click index.html and select "Open with Live Server".
-
-Python: python -m http.server
-
-Node.js: npx serve
-
-🎨 Customization Guide
-
-Change Identity: Open index.html and replace "AMAN_UDEWAL" and the project details with your own.
-
-Swap the 3D Model:
-
-Get a .glb file (e.g., from ReadyPlayerMe).
-
-Rename it to model.glb.
-
-Replace the file in the assets/ folder.
-
-Configure Contact:
-
-Open index.html and search for the <form id="emailForm">.
-
-Change the value inside window.location.href in script.js to your email address.
-
-📡 Contact
-
-GitHub: @amanudewal
-
-LinkedIn: Aman Ramakant Udewal
-
-Email: udewal.aman@gmail.com
-
-Engineered by Aman Ramakant Udewal © 2026
+├── project-offline-ai.html     # Case Study: Offline AI Assistant
+├── project-mindful-app.html    # Case Study: Mindful AI App
+├── style.css                   # Global styling & cyber aesthetics
+├── script.js                   # CLI, AI, GSAP, Telemetry & WebGL logic
+└── assets/                     # 3D Models, Audio, and PDFs
