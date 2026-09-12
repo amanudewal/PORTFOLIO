@@ -30,24 +30,22 @@ const loadingInterval = setInterval(() => {
 }, 200);
 
 function revealSite() {
+    initThreeJS();
     if (loader) {
         if (typeof gsap !== "undefined") {
             gsap.to(loader, {
-                yPercent: -100, duration: 1, ease: "power4.inOut",
+                opacity: 0, duration: 0.8, ease: "power2.inOut",
                 onComplete: () => {
                     loader.style.display = 'none';
                     initAnimations();
-                    initThreeJS();
                 }
             });
         } else {
             loader.style.display = 'none';
             initAnimations();
-            initThreeJS();
         }
     } else {
         initAnimations();
-        initThreeJS();
     }
 }
 
@@ -254,6 +252,13 @@ function initThreeJS() {
     });
 }
 
+// Auto-initialize ThreeJS particles on load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThreeJS);
+} else {
+    initThreeJS();
+}
+
 
 // --- 7. THEME TOGGLE LISTENER ---
 const themeBtn = document.getElementById('theme-toggle');
@@ -313,6 +318,18 @@ if (chips.length > 0) {
         });
     });
 }
+
+// Make catalog items globally clickable (especially for mobile where the action arrow is hidden)
+catalogItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+        // Prevent double navigation if they actually clicked the a tag itself (on desktop)
+        if (e.target.closest('a')) return;
+        const link = item.querySelector('.cat-action a');
+        if (link) window.location.href = link.href;
+    });
+    // Add visual feedback class on hover
+    item.style.cursor = 'pointer';
+});
 
 // --- 10. TESTIMONIAL CAROUSEL ---
 const slides = document.querySelectorAll('.slide');
@@ -418,10 +435,10 @@ if (cliInput && cliOutput) {
                 let response = "";
                 switch(command) {
                     case 'help': response = "> AVAILABLE COMMANDS:<br>> whoami<br>> skills.exe<br>> fetch projects<br>> download resume<br>> clear"; break;
-                    case 'whoami': response = "> AMAN UDEWAL. AI Architect. Full-Stack Developer. Final Year CSE."; break;
-                    case 'skills.exe': response = "> LOADING ARSENAL... [FLUTTER, PYTHON, TENSORFLOW, C++, DSA]"; if (typeof spikeHUD === 'function') spikeHUD(80); break;
+                    case 'whoami': response = "> AMAN UDEWAL. App Developer & Software Engineer. BTech Computer Engineering (2026)."; break;
+                    case 'skills.exe': response = "> LOADING ARSENAL... [FLUTTER, DART, PYTHON, FLASK, REACT.JS, NEXT.JS, FIREBASE, BERT, BART NLP]"; if (typeof spikeHUD === 'function') spikeHUD(80); break;
                     case 'fetch projects': response = "> REDIRECTING TO SELECTED_WORKS..."; setTimeout(() => document.getElementById('work').scrollIntoView({behavior: 'smooth'}), 1000); break;
-                    case 'download resume': response = "> INITIATING DOWNLOAD (RESUME_V2.PDF)..."; window.open('assets/Aman_Resume.pdf?v=3', '_blank'); break;
+                    case 'download resume': response = "> INITIATING DOWNLOAD (AMAN_RESUME.PDF)..."; window.open('AMAN_RAMAKANT_UDEWAL_FlowCV_Resume_2026-08-19.pdf', '_blank'); break;
                     case 'clear': cliOutput.innerHTML = "> SYSTEM CLEARED."; return;
                     case '': return;
                     default: response = `> Command not found: '${command}'. Type 'help' for protocols.`;
@@ -464,14 +481,18 @@ if (aiToggle && aiPanel) {
                     const q = query.toLowerCase();
                     let reply = "I am restricted to discussing Aman's professional profile. Ask about his skills or projects.";
                     
-                    if(q.includes('python') || q.includes('ai') || q.includes('deep learning')) {
-                        reply = "Aman leverages Python for complex AI pipelines, including Hybrid CNN-RNNs for deepfake detection and local LLM execution via Ollama.";
+                    if (q.includes('nexus')) {
+                        reply = "NEXUS is a premium cross-platform audio app developed by Aman using Flutter & Python, featuring Spotify link processing and an offline music player with Day/Night themes.";
+                    } else if (q.includes('summify')) {
+                        reply = "Summify is an AI-powered document summarization app built by Aman with Flutter & Python Flask, integrating BERT and BART NLP models.";
+                    } else if(q.includes('python') || q.includes('ai') || q.includes('nlp') || q.includes('bert')) {
+                        reply = "Aman leverages Python & Flask for backend services and AI workflows, incorporating BERT & BART models for text summarization.";
                     } else if (q.includes('flutter') || q.includes('app') || q.includes('mobile')) {
-                        reply = "Aman builds 60FPS fluid interfaces using Flutter and Dart, integrated with Firebase and Python Flask backends.";
-                    } else if (q.includes('education') || q.includes('college')) {
-                        reply = "He is a final-year Computer Engineering student at Sandipani Technical Campus, graduating in 2026.";
+                        reply = "Aman builds responsive cross-platform applications using Flutter & Dart (Riverpod, BLoC, Provider) with Firebase & REST API integration.";
+                    } else if (q.includes('education') || q.includes('college') || q.includes('sandipani')) {
+                        reply = "Aman is a Computer Engineering student at Sandipani Technical Campus Of Engineering, Latur (08/2022 - 06/2026).";
                     } else if (q.includes('hire') || q.includes('contact')) {
-                        reply = "Excellent choice. Scroll to the COMM_HUB section or use the terminal to 'download resume'.";
+                        reply = "You can reach Aman via email at udewal.aman@gmail.com or phone at +91 87675 69330, or view his official resume in COMM_HUB.";
                     }
 
                     aiLog.innerHTML += `<p class="ai-msg">> ${reply}</p>`;
@@ -551,3 +572,165 @@ window.addEventListener('load', () => {
     // Add a slight delay so it doesn't slow down the visual page loading
     setTimeout(triggerVisitorAlert, 2000); 
 });
+
+// --- MOBILE NAVIGATION DRAWER & 3D RECENT CARD CONTROLLER ---
+const mobileToggleBtn = document.getElementById('mobile-menu-toggle');
+const mobileCloseBtn = document.getElementById('mobile-menu-close');
+const mobileDrawer = document.getElementById('mobile-drawer');
+const mobileBackdrop = document.getElementById('mobile-menu-backdrop');
+const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+const siteWrapper = document.getElementById('site-wrapper');
+
+let savedScrollY = 0;
+
+function openMobileDrawer(e) {
+    if (e) e.stopPropagation();
+    if (mobileDrawer && mobileBackdrop) {
+        savedScrollY = window.scrollY;
+        document.body.classList.add('mobile-menu-open');
+        
+        // Translate main content up to preserve visual scroll position inside the 100vh wrapper
+        const mainEl = document.querySelector('main');
+        if (mainEl) mainEl.style.transform = `translateY(-${savedScrollY}px)`;
+        
+        mobileDrawer.classList.add('active');
+        mobileBackdrop.classList.add('active');
+        if (typeof playUISound === 'function' && typeof clickSound !== 'undefined') playUISound(clickSound);
+    }
+}
+
+function closeMobileDrawer() {
+    if (mobileDrawer && mobileBackdrop) {
+        document.body.classList.remove('mobile-menu-open');
+        
+        // Restore normal flow and native scroll position
+        const mainEl = document.querySelector('main');
+        if (mainEl) mainEl.style.transform = '';
+        window.scrollTo(0, savedScrollY);
+        
+        mobileDrawer.classList.remove('active');
+        mobileBackdrop.classList.remove('active');
+        if (typeof playUISound === 'function' && typeof clickSound !== 'undefined') playUISound(clickSound);
+    }
+}
+
+if (mobileToggleBtn) mobileToggleBtn.addEventListener('click', openMobileDrawer);
+if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileDrawer);
+if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileDrawer);
+if (siteWrapper) {
+    siteWrapper.addEventListener('click', (e) => {
+        if (document.body.classList.contains('mobile-menu-open')) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeMobileDrawer();
+        }
+    });
+}
+
+mobileNavItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+        const targetHref = item.getAttribute('href');
+        if (targetHref && targetHref.startsWith('#')) {
+            e.preventDefault();
+            closeMobileDrawer();
+            setTimeout(() => {
+                const targetSection = document.querySelector(targetHref);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                    history.replaceState(null, null, targetHref);
+                }
+            }, 300); // Delay allows site-wrapper to restore to auto height
+        } else {
+            closeMobileDrawer();
+        }
+    });
+});
+
+// Dynamic Active State Highlighting for Navigation
+const pageSections = document.querySelectorAll('section[id]');
+const navHighlightObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            const targetHash = `#${id}`;
+            
+            // Update Mobile Drawer
+            mobileNavItems.forEach(navItem => {
+                navItem.classList.remove('highlight');
+                if (navItem.getAttribute('href') === targetHash) {
+                    navItem.classList.add('highlight');
+                }
+            });
+            
+            // Update Desktop Nav
+            const desktopNavItems = document.querySelectorAll('.desktop-nav .nav-item[href^="#"]');
+            desktopNavItems.forEach(navItem => {
+                navItem.classList.remove('highlight');
+                if (navItem.getAttribute('href') === targetHash) {
+                    navItem.classList.add('highlight');
+                }
+            });
+        }
+    });
+}, { threshold: 0.3 });
+
+pageSections.forEach(section => {
+    navHighlightObserver.observe(section);
+});
+
+// Touch Swipe Gesture Handling (Swipe Right to Open, Swipe Left to Close)
+let touchStartX = 0;
+let touchStartY = 0;
+let isSwiping = false;
+
+window.addEventListener('touchstart', (e) => {
+    if (window.innerWidth > 880) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    isSwiping = true;
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+    if (!isSwiping || window.innerWidth > 880) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - touchStartX;
+    const diffY = Math.abs(currentY - touchStartY);
+
+    if (Math.abs(diffX) > diffY && Math.abs(diffX) > 25) {
+        if (!document.body.classList.contains('mobile-menu-open') && diffX > 40 && touchStartX < 70) {
+            openMobileDrawer();
+            isSwiping = false;
+        } else if (document.body.classList.contains('mobile-menu-open') && diffX < -40) {
+            closeMobileDrawer();
+            isSwiping = false;
+        }
+    }
+}, { passive: true });
+
+window.addEventListener('touchend', () => {
+    isSwiping = false;
+});
+
+// Mobile Controls Sync
+const mobileColorCycle = document.getElementById('mobile-color-cycle');
+const mobileSoundToggle = document.getElementById('mobile-sound-toggle');
+const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+const desktopColorCycle = document.getElementById('color-cycle');
+const desktopSoundToggle = document.getElementById('sound-toggle');
+const desktopThemeToggle = document.getElementById('theme-toggle');
+
+if (mobileColorCycle && desktopColorCycle) {
+    mobileColorCycle.addEventListener('click', () => { desktopColorCycle.click(); });
+}
+if (mobileSoundToggle && desktopSoundToggle) {
+    mobileSoundToggle.addEventListener('click', () => { 
+        desktopSoundToggle.click();
+        const icon = mobileSoundToggle.querySelector('i');
+        if (icon) icon.className = desktopSoundToggle.textContent.includes('ON') ? 'fas fa-volume-high' : 'fas fa-volume-xmark';
+    });
+}
+if (mobileThemeToggle && desktopThemeToggle) {
+    mobileThemeToggle.addEventListener('click', () => { desktopThemeToggle.click(); });
+}

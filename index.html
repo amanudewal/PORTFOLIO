@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMAN.SYS | V2.0</title>
+    <title>AMAN UDEWAL | App Developer & Software Engineer</title>
     
     <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
     
@@ -58,11 +58,11 @@
     </div>
 
     <div class="ai-widget-container">
-        <button id="ai-toggle"><i class="fas fa-robot"></i> SYS_AI</button>
-        <div class="ai-chat-panel" id="ai-panel">
+        <button id="ai-toggle" class="liquid-glass-btn"><i class="fas fa-robot"></i> SYS_AI</button>
+        <div class="ai-chat-panel liquid-glass-card" id="ai-panel">
             <div class="ai-header">AMAN.AI // AGENT_ONLINE</div>
             <div class="ai-body" id="ai-chat-log">
-                <p class="ai-msg">System AI initialized. Ask me about Aman's skills, projects, or resume.</p>
+                <p class="ai-msg">System AI initialized. Ask me about Aman's skills, projects (NEXUS, Summify), or education.</p>
             </div>
             <div class="ai-input-area">
                 <span>></span>
@@ -71,318 +71,339 @@
         </div>
     </div>
 
+    <!-- System Boot Loading Screen -->
     <div id="loader">
         <div class="sys-loading">
             <div class="blink-text">SYSTEM BOOT_SEQUENCE</div>
             <div class="load-bar-wrapper">
                 <div class="load-bar"></div>
             </div>
-            <div class="hex-codes">0x45F... LOADED</div>
+            <div class="hex-codes">0x45F... LOADING EXPERIENCE</div>
         </div>
     </div>
 
-    <header class="fixed-header">
-        <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
-        <div class="status-indicator">
-            <span class="dot"></span> SYSTEM ONLINE
+    <!-- Mobile Navigation Drawer Overlay (Separated Slide-out Drawer) -->
+    <div id="mobile-menu-backdrop" class="mobile-menu-backdrop"></div>
+    <aside id="mobile-drawer" class="mobile-menu-drawer" aria-label="Mobile Navigation">
+        <div class="mobile-drawer-header">
+            <div class="profile-info">
+                <div>
+                    <div class="profile-name">AMAN.SYS</div>
+                    <div class="profile-status"><span class="dot"></span> ONLINE</div>
+                </div>
+            </div>
+            <button class="mobile-close-btn" id="mobile-close" aria-label="Close Menu">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        <nav>
-            <a href="#hero" class="nav-item">HOME [01]</a>
-            <a href="#about" class="nav-item">DATA [02]</a>
-            <a href="#experience" class="nav-item">LOG [03]</a>
-            <a href="#work" class="nav-item">WORK [04]</a>
-            <a href="#contact" class="nav-item highlight">COMM_HUB [05]</a>
-            <button id="color-cycle" class="nav-item toggle-btn">OVERCLOCK [CYAN]</button>
-            <button id="sound-toggle" class="nav-item toggle-btn">SOUND [OFF]</button>
-            <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
-        </nav>
-    </header>
-
-    <main>
-
-        <section id="hero">
-            <div class="hero-grid">
-                <div class="hero-content">
-                    <div class="meta-tag">
-                        <span>// FINAL_YEAR_CSE</span>
-                        <span>// AI_ARCHITECT</span>
-                    </div>
-                    <h1 class="glitch-title">
-                        DIGITAL <br>
-                        <span class="hollow">REALITY</span> <br>
-                        ENGINEER
-                    </h1>
-                    
-                    <div class="interactive-terminal" id="hero-terminal" onclick="document.getElementById('cli-input').focus()">
-                        <div id="cli-output">
-                            > INITIATING NEURAL_NETWORKS...<br>
-                            > OPTIMIZING FLUTTER_PIPELINES...<br>
-                            > TARGET: GATE_2026<br>
-                            > Type 'help' to see available commands.
-                        </div>
-                        <div class="cli-input-line">
-                            <span class="cli-prompt">visitor@aman.sys:~$</span>
-                            <input type="text" id="cli-input" autocomplete="off" spellcheck="false">
-                        </div>
-                    </div>
-                    
-                    <a href="#work" class="cyber-btn" style="margin-top: 30px;">
-                        <span class="btn-text">INITIALIZE PROTOCOL</span>
-                        <span class="btn-glitch"></span>
-                    </a>
-                </div>
-
-                <div class="hero-visual">
-                    <div class="scanner-frame">
-                        <model-viewer 
-                            id="hero-avatar"
-                            src="assets/model.glb" 
-                            shadow-intensity="1.5" 
-                            shadow-softness="1"
-                            tone-mapping="aces"
-                            exposure="1.2"
-                            camera-controls="false"
-                            disable-zoom disable-pan disable-tap
-                            environment-image="neutral"
-                            autoplay
-                            animation-name="Idle"
-                            field-of-view="30deg"
-                            class="model-avatar"
-                        ></model-viewer>
-                    </div>
-                    <div class="model-caption">
-                        FIG 1.0: THE_ARCHITECT
-                    </div>
-                </div>
+        <div class="mobile-drawer-content">
+            <nav class="mobile-nav-list">
+                <a href="#hero" class="mobile-nav-item">
+                    <i class="fas fa-terminal nav-icon"></i>
+                    <span>[01] HOME</span>
+                </a>
+                <a href="#about" class="mobile-nav-item">
+                    <i class="fas fa-database nav-icon"></i>
+                    <span>[02] DATA // ABOUT</span>
+                </a>
+                <a href="#experience" class="mobile-nav-item">
+                    <i class="fas fa-graduation-cap nav-icon"></i>
+                    <span>[03] LOG // EDUCATION</span>
+                </a>
+                <a href="#work" class="mobile-nav-item">
+                    <i class="fas fa-folder-open nav-icon"></i>
+                    <span>[04] WORK // PROJECTS</span>
+                </a>
+                <a href="#contact" class="mobile-nav-item highlight">
+                    <i class="fas fa-paper-plane nav-icon"></i>
+                    <span>[05] COMM_HUB // CONTACT</span>
+                </a>
+            </nav>
+        </div>
+        <div class="mobile-drawer-controls">
+            <div class="drawer-controls-title">SYSTEM_SETTINGS</div>
+            <div class="drawer-controls-buttons">
+                <button id="mobile-color-cycle" class="drawer-btn"><i class="fas fa-palette"></i> OVERCLOCK [CYAN]</button>
+                <button id="mobile-sound-toggle" class="drawer-btn"><i class="fas fa-volume-mute"></i> SOUND</button>
+                <button id="mobile-theme-toggle" class="drawer-btn"><i class="fas fa-moon"></i> THEME</button>
             </div>
-            
-            <div class="marquee-container">
-                <div class="marquee-content">
-                    AI ENGINEER /// APP DEVELOPER /// MEDIA FORENSICS /// UI ARCHITECT /// DEEP LEARNING /// 
-                    AI ENGINEER /// APP DEVELOPER /// MEDIA FORENSICS /// UI ARCHITECT /// DEEP LEARNING /// 
-                </div>
-            </div>
-        </section>
+        </div>
+    </aside>
 
-        <section id="about">
-            <div class="section-border-top"></div>
-            <div class="split-layout">
-                <div class="bio-panel">
-                    <h2 class="section-header">CORE_DATA</h2>
-                    <p class="justify-text">
-                        I engineer <span class="accent">intelligence</span>. My mission operates at the boundary of 
-                        secure AI systems and high-performance mobile architecture.
-                        Currently deploying hybrid CNN-RNN networks to combat deepfakes while 
-                        crafting 60FPS fluid interfaces in Flutter.
-                    </p>
-                    <div class="stats-grid">
-                        <div class="stat-box">
-                            <h3>03+</h3>
-                            <span>YEARS_EXP</span>
+    <!-- Main Site Wrapper (Recedes into 3D floating card on mobile drawer swipe/open) -->
+    <div id="site-wrapper" class="site-wrapper">
+        <header class="fixed-header">
+            <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
+            <div class="status-indicator">
+                <span class="dot"></span> SYSTEM ONLINE
+            </div>
+            <nav class="desktop-nav">
+                <a href="#hero" class="nav-item">HOME [01]</a>
+                <a href="#about" class="nav-item">DATA [02]</a>
+                <a href="#experience" class="nav-item">LOG [03]</a>
+                <a href="#work" class="nav-item">WORK [04]</a>
+                <a href="#contact" class="nav-item highlight">COMM_HUB [05]</a>
+                <button id="color-cycle" class="nav-item toggle-btn">OVERCLOCK [CYAN]</button>
+                <button id="sound-toggle" class="nav-item toggle-btn">SOUND [OFF]</button>
+                <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
+            </nav>
+            <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Open Navigation Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </header>
+
+        <main>
+            <section id="hero">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <div class="meta-tag">
+                            <span>// COMPUTER_ENGINEERING_GRADUATE</span>
+                            <span>// FLUTTER_&amp;_AI_DEVELOPER</span>
                         </div>
-                        <div class="stat-box">
-                            <h3 id="gh-repos">--</h3>
-                            <span>GITHUB_REPOS</span>
+                        <div class="hero-title-wrapper">
+                            <div class="hero-title-gradient-bg"></div>
+                            <h1 class="glitch-title">
+                                APP <br>
+                                <span class="hollow">DEVELOPER</span> <br>
+                                &amp; SOFTWARE ENGINEER
+                            </h1>
+                        </div>
+                        
+                        <div class="interactive-terminal" id="hero-terminal" onclick="document.getElementById('cli-input').focus()">
+                            <div id="cli-output">
+                                > INITIATING FLUTTER &amp; PYTHON ENGINES...<br>
+                                > DEPLOYING AI &amp; NLP (BERT / BART) PIPELINES...<br>
+                                > TARGET: CROSS-PLATFORM ARCHITECTURE<br>
+                                > Type 'help' to see available commands.
+                            </div>
+                            <div class="cli-input-line">
+                                <span class="cli-prompt">visitor@aman.sys:~$</span>
+                                <input type="text" id="cli-input" autocomplete="off" spellcheck="false">
+                            </div>
+                        </div>
+                        
+                        <a href="#work" class="cyber-btn" style="margin-top: 30px;">
+                            <span class="btn-text">EXPLORE PROJECTS</span>
+                            <span class="btn-glitch"></span>
+                        </a>
+                    </div>
+
+                    <div class="hero-visual">
+                        <div class="scanner-frame">
+                            <model-viewer 
+                                id="hero-avatar"
+                                src="assets/model.glb" 
+                                shadow-intensity="1.5" 
+                                shadow-softness="1"
+                                tone-mapping="aces"
+                                exposure="1.2"
+                                camera-controls="false"
+                                disable-zoom disable-pan disable-tap
+                                environment-image="neutral"
+                                autoplay
+                                animation-name="Idle"
+                                field-of-view="30deg"
+                                class="model-avatar"
+                            ></model-viewer>
+                        </div>
+                        <div class="model-caption">
+                            FIG 1.0: AMAN UDEWAL // ARCHITECT
                         </div>
                     </div>
                 </div>
                 
-                <div class="skills-panel">
-                    <h2 class="section-header">ARSENAL</h2>
-                    <ul class="skill-list">
-                        <li class="skill-item"><span>FLUTTER / DART</span><div class="progress"><div class="fill" style="width: 95%"></div></div></li>
-                        <li class="skill-item"><span>PYTHON / AI</span><div class="progress"><div class="fill" style="width: 90%"></div></div></li>
-                        <li class="skill-item"><span>TENSORFLOW</span><div class="progress"><div class="fill" style="width: 85%"></div></div></li>
-                        <li class="skill-item"><span>C++ / DSA</span><div class="progress"><div class="fill" style="width: 80%"></div></div></li>
-                    </ul>
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        FLUTTER DEVELOPER /// PYTHON &amp; AI /// REACT.JS &amp; NEXT.JS /// REST APIs &amp; FIREBASE /// BERT &amp; BART NLP /// DART /// 
+                        FLUTTER DEVELOPER /// PYTHON &amp; AI /// REACT.JS &amp; NEXT.JS /// REST APIs &amp; FIREBASE /// BERT &amp; BART NLP /// DART /// 
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="experience">
-            <div class="section-border-top"></div>
-            <div style="text-align: center; margin-top: 60px;">
-                <h2 class="section-header">SYSTEM_LOG: EXPERIENCE</h2>
-            </div>
-            <div class="timeline">
-                <div class="line"></div>
-                <div class="timeline-item">
-                    <div class="dot"></div>
-                    <div class="content">
-                        <h3>2026 (Expected)</h3>
-                        <h4>Sandipani Technical Campus</h4>
-                        <p>B.E. Computer Engineering // Latur</p>
+            <section id="about">
+                <div class="section-border-top"></div>
+                <div class="split-layout">
+                    <div class="bio-panel">
+                        <h2 class="section-header">CORE_DATA</h2>
+                        <p class="justify-text">
+                            Computer Engineering graduate and software developer with hands-on experience in 
+                            <span class="accent">Flutter, Dart, Python, React.js, JavaScript, and TypeScript</span>.
+                            Experienced in building responsive component-based applications, integrating REST APIs, Firebase, 
+                            and building AI-powered summarization &amp; audio processing systems.
+                        </p>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <h3>B.TECH</h3>
+                                <span>COMP_ENGINEERING</span>
+                            </div>
+                            <div class="stat-box">
+                                <h3 id="gh-repos">--</h3>
+                                <span>GITHUB_REPOS</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skills-panel">
+                        <h2 class="section-header">ARSENAL</h2>
+                        <ul class="skill-list">
+                            <li class="skill-item"><span>FLUTTER / DART / STATE MGMT</span><div class="progress"><div class="fill" style="width: 95%"></div></div></li>
+                            <li class="skill-item"><span>PYTHON / FLASK / REST APIs</span><div class="progress"><div class="fill" style="width: 92%"></div></div></li>
+                            <li class="skill-item"><span>REACT.JS / NEXT.JS / TS</span><div class="progress"><div class="fill" style="width: 88%"></div></div></li>
+                            <li class="skill-item"><span>AI &amp; NLP (BERT / BART)</span><div class="progress"><div class="fill" style="width: 85%"></div></div></li>
+                            <li class="skill-item"><span>FIREBASE / SQL / WEBSOCKETS</span><div class="progress"><div class="fill" style="width: 90%"></div></div></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="dot"></div>
-                    <div class="content">
-                        <h3>2022</h3>
-                        <h4>Reliance College</h4>
-                        <p>Higher Secondary Education // Latur</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="dot"></div>
-                    <div class="content">
-                        <h3>2020</h3>
-                        <h4>ShriDeshikendra Vidyalaya</h4>
-                        <p>Secondary Education // Latur</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="work">
-            <div class="section-border-top"></div>
-            <div class="container">
-                <h2 class="section-header big" style="padding: 40px;">SELECTED_WORKS</h2>
+            <section id="experience">
+                <div class="section-border-top"></div>
+                <div style="text-align: center; margin-top: 60px;">
+                    <h2 class="section-header">SYSTEM_LOG: EDUCATION</h2>
+                </div>
+                <div class="timeline">
+                    <div class="line"></div>
+                    <div class="timeline-item">
+                        <div class="dot"></div>
+                        <div class="content">
+                            <h3>08/2022 – 06/2026</h3>
+                            <h4>Sandipani Technical Campus Of Engineering</h4>
+                            <p>BTech. in Computer Engineering // Latur</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="dot"></div>
+                        <div class="content">
+                            <h3>04/2020 – 06/2022</h3>
+                            <h4>Reliance College</h4>
+                            <p>Higher Secondary Certificate (HSC) // Latur</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="dot"></div>
+                        <div class="content">
+                            <h3>05/2017 – 01/2020</h3>
+                            <h4>Shri Deshikendra Vidyalaya</h4>
+                            <p>Secondary School Certificate (SSC) // Latur</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="work">
+                <div class="section-border-top"></div>
+                <div class="container">
+                    <h2 class="section-header big" style="padding: 40px;">SELECTED_WORKS</h2>
+                    
+                    <div class="filter-chips">
+                        <button class="chip active" data-filter="all">All</button>
+                        <button class="chip" data-filter="Mobile">Mobile</button>
+                        <button class="chip" data-filter="AI">AI</button>
+                        <button class="chip" data-filter="Python">Python</button>
+                    </div>
+
+                    <div class="project-catalog">
+                        
+                        <div class="catalog-item" data-category="Mobile Python">
+                            <div class="cat-id">001</div>
+                            <div class="cat-info">
+                                <h3>NEXUS</h3>
+                                <p>CROSS-PLATFORM AUDIO APPLICATION</p>
+                                <div class="tags"><span>FLUTTER</span> / <span>PYTHON</span> / <span>SPOTIFY API</span> / <span>OFFLINE PLAYER</span></div>
+                                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                                    Premium cross-platform audio app using Flutter and Python. Features an integrated offline music player, dynamic Day/Night themes, and Python backend for processing Spotify links.
+                                </p>
+                            </div>
+                            <div class="cat-action"><a href="project-nexus.html"><i class="fas fa-arrow-right"></i></a></div>
+                        </div>
+                        
+                        <div class="catalog-item" data-category="AI Mobile Python">
+                            <div class="cat-id">002</div>
+                            <div class="cat-info">
+                                <h3>SUMMIFY</h3>
+                                <p>AI-POWERED DOCUMENT SUMMARIZATION</p>
+                                <div class="tags"><span>FLUTTER</span> / <span>PYTHON</span> / <span>FLASK</span> / <span>BERT</span> / <span>BART</span></div>
+                                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                                    AI document summarization app built with Flutter frontend and Flask backend. Integrates BERT and BART NLP models to convert lengthy documents into concise summaries.
+                                </p>
+                            </div>
+                            <div class="cat-action"><a href="project-summify.html"><i class="fas fa-arrow-right"></i></a></div>
+                        </div>
+
+                        <div class="catalog-item" data-category="WebGL Mobile">
+                            <div class="cat-id">003</div>
+                            <div class="cat-info">
+                                <h3>3D CYBER PORTFOLIO</h3>
+                                <p>WEBGL &amp; THREE.JS CYBERPUNK EXPERIENCE</p>
+                                <div class="tags"><span>THREE.JS</span> / <span>GSAP</span> / <span>WEBGL</span> / <span>CSS3</span></div>
+                                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                                    Interactive 3D cyberpunk developer portfolio with custom Three.js lighting, 3D model viewer, interactive CLI terminal, and AI assistant chatbot.
+                                </p>
+                            </div>
+                            <div class="cat-action"><a href="project-cyber-portfolio.html"><i class="fas fa-arrow-right"></i></a></div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <div class="section-border-top"></div>
                 
-                <div class="filter-chips">
-                    <button class="chip active" data-filter="all">All</button>
-                    <button class="chip" data-filter="AI">AI</button>
-                    <button class="chip" data-filter="Mobile">Mobile</button>
-                    <button class="chip" data-filter="WebGL">WebGL</button>
+                <div class="container" style="padding-top: 50px; text-align: center;">
+                    <h2 class="section-header">COMMUNICATION_HUB</h2>
                 </div>
 
-                <div class="project-catalog">
+                <div class="comm-hub">
                     
-                    <div class="catalog-item" data-category="AI">
-                        <div class="cat-id">001</div>
-                        <div class="cat-info">
-                            <h3>DEEPFAKE_DETECTOR</h3>
-                            <p>HYBRID CNN-RNN FORENSIC SYSTEM</p>
-                            <div class="tags"><span>PYTHON</span> / <span>OPENCV</span> / <span>KERAS</span></div>
+                    <div class="comm-panel liquid-glass-card">
+                        <div class="comm-header">
+                            <i class="fas fa-coffee"></i>
+                            <h2>BUY ME A COFFEE</h2>
                         </div>
-                        <div class="cat-action"><a href="project-deepfake.html"><i class="fas fa-arrow-right"></i></a></div>
+                        <form class="email-form" action="mailto:udewal.aman@gmail.com" method="POST" enctype="text/plain">
+                            <div class="form-group">
+                                <label>YOUR EMAIL:</label>
+                                <input type="email" name="email" class="cyber-input" placeholder="your-email@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>SUBJECT:</label>
+                                <input type="text" name="subject" class="cyber-input" placeholder="Project Inquiry / Hiring" required>
+                            </div>
+                            <div class="form-group">
+                                <label>MESSAGE:</label>
+                                <textarea name="message" class="cyber-input" placeholder="Let's build something awesome..." required></textarea>
+                            </div>
+                            <button type="submit" class="cyber-btn liquid-glass-btn" style="width:100%; margin-top:10px;">
+                                SEND MESSAGE
+                            </button>
+                        </form>
                     </div>
-                    
-                    <div class="catalog-item" data-category="Mobile AI">
-                        <div class="cat-id">002</div>
-                        <div class="cat-info">
-                            <h3>MENTAL_HEALTH_AI</h3>
-                            <p>SIH 2025: NLP CHATBOT ECOSYSTEM</p>
-                            <div class="tags"><span>FLUTTER</span> / <span>FIREBASE</span> / <span>BERT</span></div>
+
+                    <div class="links-panel liquid-glass-card">
+                        <div class="footer-links" style="display: flex; flex-direction: column; gap: 20px;">
+                            <a href="mailto:udewal.aman@gmail.com"><i class="fas fa-envelope"></i> EMAIL: udewal.aman@gmail.com</a>
+                            <a href="tel:+918767569330"><i class="fas fa-phone"></i> PHONE: +91 87675 69330</a>
+                            <a href="https://linkedin.com/in/aman-udewal" target="_blank"><i class="fab fa-linkedin"></i> LINKEDIN_PROFILE</a>
+                            <a href="https://github.com/amanudewal" target="_blank"><i class="fab fa-github"></i> GITHUB_REPO</a>
+                            <a href="AMAN_RAMAKANT_UDEWAL_FlowCV_Resume_2026-08-19.pdf" target="_blank"><i class="fas fa-file-pdf"></i> RESUME_OFFICIAL.PDF</a>
                         </div>
-                        <div class="cat-action"><a href="project-mental-health.html"><i class="fas fa-arrow-right"></i></a></div>
-                    </div>
-                    
-                    <div class="catalog-item" data-category="AI">
-                        <div class="cat-id">003</div>
-                        <div class="cat-info">
-                            <h3>CINEMATIC_GEN_AI</h3>
-                            <p>STABLE DIFFUSION LORA PIPELINE</p>
-                            <div class="tags"><span>GENERATIVE AI</span> / <span>GRADIO</span></div>
-                        </div>
-                        <div class="cat-action"><a href="project-gen-ai.html"><i class="fas fa-arrow-right"></i></a></div>
-                    </div>
-                    
-                    <div class="catalog-item" data-category="Mobile AI">
-                        <div class="cat-id">004</div>
-                        <div class="cat-info">
-                            <h3>OFFLINE_AI_ASSISTANT</h3>
-                            <p>LOCAL LLM & PIPER TTS HYBRID</p>
-                            <div class="tags"><span>Llama 3</span> / <span>FLUTTER</span> / <span>PYTHON</span></div>
-                        </div>
-                        <div class="cat-action"><a href="project-offline-ai.html"><i class="fas fa-arrow-right"></i></a></div>
-                    </div>
-                    
-                    <div class="catalog-item" data-category="Mobile">
-                        <div class="cat-id">005</div>
-                        <div class="cat-info">
-                            <h3>MINDFUL_AI_APP</h3>
-                            <p>FIREBASE SOCIAL AUTH & RIVE UI</p>
-                            <div class="tags"><span>FLUTTER</span> / <span>FIREBASE</span> / <span>UI/UX</span></div>
-                        </div>
-                        <div class="cat-action"><a href="project-mindful-app.html"><i class="fas fa-arrow-right"></i></a></div>
-                    </div>
-                    
-                    <div class="catalog-item" data-category="WebGL">
-                        <div class="cat-id">006</div>
-                        <div class="cat-info">
-                            <h3>3D_CYBER_PORTFOLIO</h3>
-                            <p>WEBGL BRUTALIST ARCHITECTURE</p>
-                            <div class="tags"><span>THREE.JS</span> / <span>GSAP</span> / <span>CSS</span></div>
-                        </div>
-                        <div class="cat-action"><a href="project-cyber-portfolio.html"><i class="fas fa-arrow-right"></i></a></div>
                     </div>
 
                 </div>
-            </div>
-        </section>
-
-        <section id="testimonials">
-            <h2 class="section-header big">WHAT PEOPLE SAY</h2>
-            <div class="carousel">
-                <div class="slide active">
-                    <p class="quote">“A mind‑blowing blend of art & tech – the 3D avatar feels alive.”</p>
-                    <span class="author">— Alex R., Creative Director</span>
-                </div>
-                <div class="slide">
-                    <p class="quote">“The offline AI assistant is a game‑changer for privacy‑first workflows.”</p>
-                    <span class="author">— Maya K., AI Engineer</span>
-                </div>
-                <div class="slide">
-                    <p class="quote">“Your UI feels like a cyber‑punk dashboard – pure premium vibes.”</p>
-                    <span class="author">— Luis P., Front‑end Lead</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="section-border-top"></div>
-            
-            <div class="container" style="padding-top: 50px; text-align: center;">
-                <h2 class="section-header">COMMUNICATION_HUB</h2>
-            </div>
-
-            <div class="comm-hub">
                 
-                <div class="comm-panel">
-                    <div class="comm-header">
-                        <i class="fas fa-coffee"></i>
-                        <h2>BUY ME A COFFEE</h2>
-                    </div>
-                    <form class="email-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-                        <div class="form-group">
-                            <label>YOUR EMAIL:</label>
-                            <input type="email" name="email" class="cyber-input" placeholder="so-i-can-reply@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label>SUBJECT:</label>
-                            <input type="text" name="subject" class="cyber-input" placeholder="Project Idea / Just a Hello" required>
-                        </div>
-                        <div class="form-group">
-                            <label>MESSAGE:</label>
-                            <textarea name="message" class="cyber-input" placeholder="Let's build something awesome..." required></textarea>
-                        </div>
-                        <button type="submit" class="cyber-btn" style="width:100%; margin-top:10px;">
-                            SEND MESSAGE
-                        </button>
-                    </form>
-                </div>
-
-                <div class="links-panel">
-                    <div class="footer-links">
-                        <a href="https://github.com/amanudewal" target="_blank"><i class="fab fa-github"></i> GITHUB_REPO</a>
-                        <a href="https://www.linkedin.com/in/aman-udewal/" target="_blank"><i class="fab fa-linkedin"></i> LINKEDIN_PROFILE</a>
-                        <a href="assets/Aman_Resume.pdf?v=3" target="_blank"><i class="fas fa-file-pdf"></i> RESUME_V2</a>
+                <div class="marquee-container reverse">
+                    <div class="marquee-content">
+                        ENGINEERED BY AMAN UDEWAL /// 2026 /// ENGINEERED BY AMAN UDEWAL /// 2026 ///
                     </div>
                 </div>
+            </section>
 
-            </div>
-            
-            <div class="marquee-container reverse">
-                <div class="marquee-content">
-                    ENGINEERED BY AMAN UDEWAL /// 2026 /// ENGINEERED BY AMAN UDEWAL /// 2026 ///
-                </div>
-            </div>
-        </section>
-
-        <button id="back-to-top" aria-label="Back to top">
-            <i class="fas fa-chevron-up"></i>
-        </button>
-    </main>
+            <button id="back-to-top" aria-label="Back to top">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+        </main>
+    </div>
     
     <script src="script.js"></script>
 
