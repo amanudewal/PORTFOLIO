@@ -22,9 +22,10 @@
 
 - 🖥️ **Interactive Terminal (CLI):** A functional command-line interface. Type commands like `help`, `skills.exe`, and `download resume`.
 - 🤖 **Embedded AI Assistant (SYS_AI):** A stealthy cyber-HUD widget that simulates an NLP agent to answer queries.
-- 📊 **Live Diagnostics HUD:** Dynamic CPU and Memory allocation bars that spike based on user interaction.
 - ✨ **WebGL Particle Engine:** Interactive, mouse-tracking 3D particles powered by `Three.js` that adapt to the active theme.
-- 🎨 **System Overclock (Color Protocol):** Instantly hot-swap the primary system accent color (Cyan, Ultraviolet, Plasma, Override).
+- 🎨 **System Overclock (Color Protocol):** Instantly hot-swap the primary system accent color via the mobile tray or CLI.
+- 📱 **Mobile Command Drawer:** A fully responsive off-canvas tray for quick access to system settings, audio toggles, and navigation.
+- 💧 **Liquid Glass UI:** Ultra-premium glassmorphism cursor and UI elements mimicking optical refraction.
 - 👁️ **Advanced Visitor Telemetry:** Stealth tracking protocol pushing OS, location, and IP alerts to a mobile device via `ntfy.sh`.
 - 🗿 **3D Hero Identity:** Interactive GLB avatar rendered via `<model-viewer>`.
 - 🔊 **Audio Architecture:** Integrated UI sound design with mechanical hover/click states.
@@ -52,11 +53,10 @@
 ```bash
 AMAN.SYS/
 ├── index.html                  # Main OS Dashboard
-├── project-deepfake.html       # Case Study: Deepfake Detector
-├── project-mental-health.html  # Case Study: Mental Health AI
-├── project-gen-ai.html         # Case Study: Cinematic Gen AI
-├── project-offline-ai.html     # Case Study: Offline AI Assistant
-├── project-mindful-app.html    # Case Study: Mindful AI App
+├── project-nexus.html          # Case Study: Project Nexus (New)
+├── project-summify.html        # Case Study: Summify AI (New)
+├── project-cyber-portfolio.html# Case Study: AMAN.SYS Portfolio
 ├── style.css                   # Global styling & cyber aesthetics
 ├── script.js                   # CLI, AI, GSAP, Telemetry & WebGL logic
 └── assets/                     # 3D Models, Audio, and PDFs
+```
