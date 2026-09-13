@@ -1,0 +1,329 @@
+/* intro.css - Left/Right Split Layout & Polish */
+html,
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#webgl-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Ensure the full screen is covered */
+.intro-screen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    /* Model left, Text right */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    padding: 0 10%;
+    gap: 5%;
+    transform-origin: center center;
+    /* For CRT effect */
+}
+
+/* 3D Model Layer (Right side) */
+.intro-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.intro-visual .scanner-frame {
+    width: 100%;
+    height: 85vh;
+    /* Restored large size */
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.intro-visual model-viewer {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    /* Hidden initially, fades in when loaded via JS */
+}
+
+/* Glowing Hologram Base */
+.holo-base {
+    position: absolute;
+    bottom: 5%;
+    /* Places it around where the feet should be */
+    left: 50%;
+    transform: translate(-50%, 50%) rotateX(75deg);
+    /* translateY(50%) pushes the center of the ring precisely under the feet */
+    width: 250px;
+    height: 250px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--accent), inset 0 0 30px var(--accent);
+    opacity: 0.5;
+    z-index: -1;
+    pointer-events: none;
+    animation: holoPulse 3s infinite alternate;
+}
+
+@keyframes holoPulse {
+    0% {
+        transform: translateX(-50%) rotateX(75deg) scale(0.9);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateX(-50%) rotateX(75deg) scale(1.1);
+        opacity: 0.7;
+    }
+}
+
+.model-caption {
+    position: absolute;
+    bottom: 5vh;
+    /* Positioned precisely at the bottom center of the model space */
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-align: center;
+    width: 100%;
+}
+
+/* --- MODEL LOADER --- */
+.scanning-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    z-index: 10;
+}
+
+.scanning-loader .spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 243, 255, 0.1);
+    border-top: 3px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Text Layer (Left side) */
+.intro-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    z-index: 5;
+    perspective: 1000px;
+    /* Required for 3D text parallax */
+}
+
+.hero-title-wrapper {
+    transform-style: preserve-3d;
+}
+
+/* --- GLITCH & TYPING EFFECTS --- */
+.massive-title {
+    font-size: clamp(5rem, 10vw, 10rem) !important;
+    line-height: 0.8 !important;
+    margin-bottom: 20px;
+}
+
+.periodic-glitch {
+    position: relative;
+    animation: periodicGlitch 7s infinite;
+}
+
+@keyframes periodicGlitch {
+
+    0%,
+    94% {
+        text-shadow: none;
+        transform: none;
+    }
+
+    95% {
+        text-shadow: 2px 2px #00f3ff, -2px -2px #ff007f;
+        transform: translate(-2px, 2px);
+    }
+
+    96% {
+        text-shadow: -2px -2px #00f3ff, 2px 2px #ff007f;
+        transform: translate(2px, -2px);
+    }
+
+    97% {
+        text-shadow: 2px -2px #00f3ff, -2px 2px #ff007f;
+        transform: translate(-2px, -2px);
+    }
+
+    98%,
+    100% {
+        text-shadow: none;
+        transform: none;
+    }
+}
+
+.blinking-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2rem;
+    background-color: var(--accent);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* --- BUTTON STYLES --- */
+.cyber-btn {
+    display: inline-block;
+    position: relative;
+    padding: 15px 40px;
+    margin-top: 20px;
+    background: var(--accent) !important;
+    border: 2px solid var(--accent) !important;
+    color: #000 !important;
+    /* Force black text so it is readable on cyan */
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 50;
+    box-shadow: 0 0 20px var(--accent);
+    animation: btnPulse 2s infinite alternate;
+}
+
+@keyframes btnPulse {
+    0% {
+        box-shadow: 0 0 15px var(--accent);
+        transform: scale(1);
+    }
+
+    100% {
+        box-shadow: 0 0 30px var(--accent);
+        transform: scale(1.02);
+    }
+}
+
+.cyber-btn:hover {
+    background: transparent !important;
+    color: var(--accent) !important;
+    /* Override style.css forcing black text on hover */
+    box-shadow: 0 0 30px var(--accent), inset 0 0 20px var(--accent) !important;
+}
+
+.cyber-btn .btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+
+    html,
+    body {
+        overflow: auto;
+        /* Allow scrolling on tiny devices */
+        overflow-x: hidden;
+    }
+
+    .intro-screen {
+        height: auto;
+        min-height: 100vh;
+        flex-direction: column;
+        padding-top: 5vh;
+        gap: 10px;
+        justify-content: flex-start;
+    }
+
+    .intro-content {
+        align-items: center;
+        text-align: center;
+        height: auto;
+        flex: 0 0 auto;
+        padding-bottom: 20px;
+        z-index: 100;
+        width: 100%;
+    }
+
+    .meta-tag {
+        justify-content: center !important;
+    }
+
+    .interactive-terminal {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-bottom: 20px !important;
+        min-height: 140px !important;
+    }
+
+    .massive-title {
+        font-size: clamp(3rem, 12vw, 5rem) !important;
+        margin-bottom: 10px !important;
+    }
+
+    .intro-visual {
+        height: 50vh;
+        min-height: 400px;
+        width: 100%;
+        margin-top: 10px;
+        flex: 0 0 auto;
+    }
+
+    .intro-visual .scanner-frame {
+        height: 100%;
+    }
+
+    .holo-base {
+        width: 180px;
+        height: 180px;
+        bottom: 5%;
+    }
+
+    .model-caption {
+        bottom: 0%;
+    }
+}

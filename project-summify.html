@@ -80,7 +80,7 @@
         </div>
         <div class="mobile-drawer-content">
             <nav class="mobile-nav-list">
-                <a href="index.html" class="mobile-nav-item highlight">
+                <a href="portfolio.html?skipIntro=true#work" onclick="if(document.referrer && document.referrer.includes(window.location.hostname)) { history.back(); return false; }" class="mobile-nav-item highlight">
                     <i class="fas fa-arrow-left nav-icon"></i>
                     <span>BACK_TO_HQ</span>
                 </a>
@@ -101,14 +101,14 @@
         <header class="fixed-header">
             <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
             <nav class="desktop-nav">
-                <a href="index.html" class="nav-item">BACK_TO_HQ [ESC]</a>
+                <a href="portfolio.html?skipIntro=true#work" onclick="if(document.referrer && document.referrer.includes(window.location.hostname)) { history.back(); return false; }" class="nav-item">BACK_TO_HQ [ESC]</a>
                 <button id="color-cycle" class="nav-item toggle-btn">OVERCLOCK [CYAN]</button>
                 <button id="sound-toggle" class="nav-item toggle-btn">SOUND [OFF]</button>
                 <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
             </nav>
-            <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Open Navigation Menu">
-                <i class="fas fa-bars"></i>
-            </button>
+            <a href="portfolio.html?skipIntro=true#work" onclick="if(document.referrer && document.referrer.includes(window.location.hostname)) { history.back(); return false; }" class="mobile-toggle-btn" aria-label="Back to HQ" style="text-decoration: none;">
+                <i class="fas fa-arrow-left"></i>
+            </a>
         </header>
 
         <main>

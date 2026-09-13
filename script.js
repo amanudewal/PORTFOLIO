@@ -2,6 +2,9 @@
 const body = document.body;
 
 // --- 1. LOADING SEQUENCE ---
+const urlParams = new URLSearchParams(window.location.search);
+const skipIntro = urlParams.get('skipIntro') === 'true';
+
 const loader = document.getElementById('loader');
 const loadBar = document.querySelector('.load-bar');
 const modelViewer = document.querySelector('#hero-avatar');
@@ -9,25 +12,31 @@ const modelViewer = document.querySelector('#hero-avatar');
 let loadProgress = 0;
 let isModelLoaded = false;
 
-if (modelViewer) {
-    modelViewer.addEventListener('load', () => { isModelLoaded = true; });
-    setTimeout(() => { isModelLoaded = true; }, 3000); 
-} else {
+if (skipIntro) {
+    if (loader) loader.style.display = 'none';
     isModelLoaded = true;
-}
-
-const loadingInterval = setInterval(() => {
-    loadProgress += Math.random() * 15;
-    if (loadProgress >= 100) loadProgress = 100;
-    
-    const visualProgress = (loadProgress === 100 && !isModelLoaded) ? 90 : loadProgress;
-    if (loadBar) loadBar.style.width = `${visualProgress}%`;
-
-    if (loadProgress === 100 && isModelLoaded) {
-        clearInterval(loadingInterval);
-        setTimeout(revealSite, 200);
+    setTimeout(revealSite, 50);
+} else {
+    if (modelViewer) {
+        modelViewer.addEventListener('load', () => { isModelLoaded = true; });
+        setTimeout(() => { isModelLoaded = true; }, 3000);
+    } else {
+        isModelLoaded = true;
     }
-}, 200);
+
+    const loadingInterval = setInterval(() => {
+        loadProgress += Math.random() * 15;
+        if (loadProgress >= 100) loadProgress = 100;
+
+        const visualProgress = (loadProgress === 100 && !isModelLoaded) ? 90 : loadProgress;
+        if (loadBar) loadBar.style.width = `${visualProgress}%`;
+
+        if (loadProgress === 100 && isModelLoaded) {
+            clearInterval(loadingInterval);
+            setTimeout(revealSite, 200);
+        }
+    }, 200);
+}
 
 function revealSite() {
     initThreeJS();
@@ -59,11 +68,11 @@ if (cursor && follower && typeof gsap !== "undefined") {
     gsap.set(follower, { xPercent: -50, yPercent: -50 });
 
     // 2. Setup highly optimized quickTo functions for 60FPS tracking
-    let cursorX = gsap.quickTo(cursor, "x", {duration: 0.05, ease: "power3"});
-    let cursorY = gsap.quickTo(cursor, "y", {duration: 0.05, ease: "power3"});
-    
-    let followerX = gsap.quickTo(follower, "x", {duration: 0.4, ease: "power3"});
-    let followerY = gsap.quickTo(follower, "y", {duration: 0.4, ease: "power3"});
+    let cursorX = gsap.quickTo(cursor, "x", { duration: 0.05, ease: "power3" });
+    let cursorY = gsap.quickTo(cursor, "y", { duration: 0.05, ease: "power3" });
+
+    let followerX = gsap.quickTo(follower, "x", { duration: 0.4, ease: "power3" });
+    let followerY = gsap.quickTo(follower, "y", { duration: 0.4, ease: "power3" });
 
     // 3. Track mouse movement
     window.addEventListener('mousemove', (e) => {
@@ -75,26 +84,26 @@ if (cursor && follower && typeof gsap !== "undefined") {
 
     // 4. Hover Effects for Interactive Elements (Added the new buttons to this list)
     const interactables = document.querySelectorAll('a, button, .catalog-item, .cyber-input, .footer-links a, .chip, input');
-    
+
     interactables.forEach(el => {
         el.addEventListener('mouseenter', () => {
             // Make the outer ring bigger and hide the inner dot
-            gsap.to(follower, { 
-                width: 60, height: 60, 
-                backgroundColor: 'rgba(0, 243, 255, 0.1)', 
-                duration: 0.3 
+            gsap.to(follower, {
+                width: 60, height: 60,
+                backgroundColor: 'rgba(0, 243, 255, 0.1)',
+                duration: 0.3
             });
-            gsap.to(cursor, { scale: 0, duration: 0.2 }); 
+            gsap.to(cursor, { scale: 0, duration: 0.2 });
         });
-        
+
         el.addEventListener('mouseleave', () => {
             // Revert to default state
-            gsap.to(follower, { 
-                width: 40, height: 40, 
-                backgroundColor: 'transparent', 
-                duration: 0.3 
+            gsap.to(follower, {
+                width: 40, height: 40,
+                backgroundColor: 'transparent',
+                duration: 0.3
             });
-            gsap.to(cursor, { scale: 1, duration: 0.2 }); 
+            gsap.to(cursor, { scale: 1, duration: 0.2 });
         });
     });
 }
@@ -110,12 +119,12 @@ let soundsEnabled = false;
 if (musicBtn && music) {
     musicBtn.addEventListener('click', () => {
         soundsEnabled = !soundsEnabled;
-        if (soundsEnabled) { 
-            music.play(); 
-            musicBtn.textContent = "SOUND [ON]"; 
-        } else { 
-            music.pause(); 
-            musicBtn.textContent = "SOUND [OFF]"; 
+        if (soundsEnabled) {
+            music.play();
+            musicBtn.textContent = "SOUND [ON]";
+        } else {
+            music.pause();
+            musicBtn.textContent = "SOUND [OFF]";
         }
         playUISound(clickSound);
     });
@@ -124,7 +133,7 @@ if (musicBtn && music) {
 const playUISound = (audioEl) => {
     if (soundsEnabled && audioEl) {
         audioEl.currentTime = 0;
-        audioEl.play().catch(e => {}); // Catch error if browser blocks fast rapid plays
+        audioEl.play().catch(e => { }); // Catch error if browser blocks fast rapid plays
     }
 }
 
@@ -146,16 +155,16 @@ function initAnimations() {
     if (document.querySelector(".hero-text") || document.querySelector(".hero-content")) {
         const tl = gsap.timeline();
         tl.from(".meta-tag", { opacity: 0, x: -20, duration: 0.5 })
-          .from(".glitch-title", { opacity: 0, y: 50, duration: 0.8, ease: "power4.out" }, "-=0.3")
-          .from(".interactive-terminal", { opacity: 0, x: -50, duration: 0.5 }, "-=0.5") // Added Terminal to timeline
-          .from(".hero-visual", { opacity: 0, scale: 0.9, duration: 1 }, "-=0.5");
+            .from(".glitch-title", { opacity: 0, y: 50, duration: 0.8, ease: "power4.out" }, "-=0.3")
+            .from(".interactive-terminal", { opacity: 0, x: -50, duration: 0.5 }, "-=0.5") // Added Terminal to timeline
+            .from(".hero-visual", { opacity: 0, scale: 0.9, duration: 1 }, "-=0.5");
     }
 
     if (document.querySelector("#about")) {
         gsap.from(".bio-panel", { scrollTrigger: { trigger: "#about", start: "top 70%", toggleActions: "play reverse play reverse" }, x: -50, opacity: 0, duration: 1 });
         gsap.from(".skills-panel", { scrollTrigger: { trigger: "#about", start: "top 70%", toggleActions: "play reverse play reverse" }, x: 50, opacity: 0, duration: 1 });
     }
-    
+
     // Timeline Animations
     if (document.querySelector(".timeline")) {
         gsap.from(".timeline .line", { scrollTrigger: { trigger: ".timeline", start: "top 80%" }, height: 0, duration: 1.5, ease: "power3.out" });
@@ -165,7 +174,7 @@ function initAnimations() {
     gsap.utils.toArray('.catalog-item').forEach((item, i) => {
         gsap.from(item, { scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play reverse play reverse" }, y: 50, opacity: 0, duration: 0.6, delay: (i % 3) * 0.1 });
     });
-    
+
     gsap.utils.toArray('.content-block, .data-card, .dashboard-header').forEach((item, i) => {
         gsap.from(item, { scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play reverse play reverse" }, y: 30, opacity: 0, duration: 0.5, delay: 0.1 });
     });
@@ -177,7 +186,7 @@ fetch('https://api.github.com/users/amanudewal')
     .then(res => res.json())
     .then(data => {
         const repoBox = document.getElementById('gh-repos');
-        if(repoBox && data.public_repos) {
+        if (repoBox && data.public_repos) {
             // Animates the number counting up
             gsap.to(repoBox, {
                 innerHTML: data.public_repos,
@@ -203,12 +212,12 @@ function initThreeJS() {
     const particlesCount = 800; // Adjust for density
     const posArray = new Float32Array(particlesCount * 3);
 
-    for(let i = 0; i < particlesCount * 3; i++) {
+    for (let i = 0; i < particlesCount * 3; i++) {
         posArray[i] = (Math.random() - 0.5) * 5; // Spread particles
     }
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    
+
     // We use a white color with opacity so the CSS Blend Modes can color them dynamically based on theme/overclock
     const material = new THREE.PointsMaterial({ size: 0.005, color: 0xffffff, transparent: true, opacity: 0.5 });
     const particlesMesh = new THREE.Points(particlesGeometry, material);
@@ -227,7 +236,7 @@ function initThreeJS() {
         requestAnimationFrame(animate);
         // Base rotation
         particlesMesh.rotation.y += 0.001;
-        
+
         // Mouse interaction shifts the matrix slightly
         if (typeof gsap !== "undefined") {
             gsap.to(particlesMesh.rotation, {
@@ -236,10 +245,10 @@ function initThreeJS() {
                 duration: 2
             });
         }
-        
+
         // Make sure particles match the active CSS Accent Color dynamically
         const currentAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
-        if(currentAccent) material.color.set(currentAccent);
+        if (currentAccent) material.color.set(currentAccent);
 
         renderer.render(scene, camera);
     }
@@ -268,7 +277,7 @@ if (themeBtn) {
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         document.body.setAttribute('data-theme', newTheme);
         localStorage.setItem('portfolio-theme', newTheme);
-        
+
         // Trigger a HUD spike if the feature exists
         if (typeof spikeHUD === 'function') spikeHUD(100);
     });
@@ -301,19 +310,19 @@ if (chips.length > 0) {
         chip.addEventListener('click', () => {
             chips.forEach(c => c.classList.remove('active'));
             chip.classList.add('active');
-            
+
             const filterValue = chip.getAttribute('data-filter');
             catalogItems.forEach(item => {
                 const category = item.getAttribute('data-category') || "";
                 if (filterValue === 'all' || category.includes(filterValue)) {
-                    item.style.display = 'grid'; 
-                    if (typeof gsap !== "undefined") gsap.fromTo(item, {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.4});
+                    item.style.display = 'grid';
+                    if (typeof gsap !== "undefined") gsap.fromTo(item, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
                 } else {
                     item.style.display = 'none';
                 }
             });
-            if(window.innerWidth <= 768) {
-                catalogItems.forEach(item => { if(item.style.display === 'grid') item.style.display = 'flex'; });
+            if (window.innerWidth <= 768) {
+                catalogItems.forEach(item => { if (item.style.display === 'grid') item.style.display = 'flex'; });
             }
         });
     });
@@ -346,7 +355,7 @@ if (slides.length > 0) {
     setInterval(() => {
         if (typeof gsap !== "undefined") gsap.to(slides[currentSlide], { autoAlpha: 0, duration: 0.5, onComplete: switchSlide });
         else switchSlide();
-    }, 5000); 
+    }, 5000);
 }
 
 // --- 11. BACK TO TOP BUTTON ---
@@ -369,12 +378,12 @@ function playAvatarAnimation(animName) {
         // Change the animation
         model.animationName = animName;
         model.play({ repetitions: 1 }); // Play once
-        
+
         // Return to "Idle" after the animation finishes
         setTimeout(() => {
             model.animationName = "Idle";
             model.play();
-        }, 2000); 
+        }, 2000);
     }
 }
 
@@ -403,11 +412,11 @@ if (colorBtn) {
     colorBtn.addEventListener('click', () => {
         currentProtocol = (currentProtocol + 1) % protocols.length;
         const newColor = protocols[currentProtocol].color;
-        
+
         // Update CSS Variable globally
         document.documentElement.style.setProperty('--accent', newColor);
         colorBtn.textContent = `OVERCLOCK [${protocols[currentProtocol].name}]`;
-        
+
         // Spike HUD on color change
         if (typeof spikeHUD === 'function') spikeHUD(100);
     });
@@ -423,21 +432,21 @@ if (cliInput && cliOutput) {
         if (e.key === 'Enter') {
             const command = cliInput.value.trim().toLowerCase();
             cliInput.value = '';
-            
+
             // Play sound if function exists
             if (typeof playUISound === 'function') playUISound(clickSound);
-            
+
             // Append user command
             cliOutput.innerHTML += `<br><span style="color:var(--text)">visitor@aman.sys:~$ ${command}</span><br>`;
-            
+
             // Process command
             setTimeout(() => {
                 let response = "";
-                switch(command) {
+                switch (command) {
                     case 'help': response = "> AVAILABLE COMMANDS:<br>> whoami<br>> skills.exe<br>> fetch projects<br>> download resume<br>> clear"; break;
                     case 'whoami': response = "> AMAN UDEWAL. App Developer & Software Engineer. BTech Computer Engineering (2026)."; break;
                     case 'skills.exe': response = "> LOADING ARSENAL... [FLUTTER, DART, PYTHON, FLASK, REACT.JS, NEXT.JS, FIREBASE, BERT, BART NLP]"; if (typeof spikeHUD === 'function') spikeHUD(80); break;
-                    case 'fetch projects': response = "> REDIRECTING TO SELECTED_WORKS..."; setTimeout(() => document.getElementById('work').scrollIntoView({behavior: 'smooth'}), 1000); break;
+                    case 'fetch projects': response = "> REDIRECTING TO SELECTED_WORKS..."; setTimeout(() => document.getElementById('work').scrollIntoView({ behavior: 'smooth' }), 1000); break;
                     case 'download resume': response = "> INITIATING DOWNLOAD (AMAN_RESUME.PDF)..."; window.open('AMAN_RAMAKANT_UDEWAL_FlowCV_Resume_2026-08-19.pdf', '_blank'); break;
                     case 'clear': cliOutput.innerHTML = "> SYSTEM CLEARED."; return;
                     case '': return;
@@ -461,8 +470,8 @@ if (aiToggle && aiPanel) {
     aiToggle.addEventListener('click', () => {
         const isHidden = window.getComputedStyle(aiPanel).display === 'none';
         aiPanel.style.display = isHidden ? 'flex' : 'none';
-        if(isHidden && aiInput) aiInput.focus();
-        
+        if (isHidden && aiInput) aiInput.focus();
+
         // Play sound if function exists
         if (typeof playUISound === 'function') playUISound(clickSound);
     });
@@ -472,20 +481,20 @@ if (aiToggle && aiPanel) {
             if (e.key === 'Enter' && aiInput.value.trim() !== '') {
                 const query = aiInput.value.trim();
                 aiInput.value = '';
-                
+
                 aiLog.innerHTML += `<p class="user-msg">${query}</p>`;
                 aiLog.scrollTop = aiLog.scrollHeight;
-                
+
                 // Mock NLP processing
                 setTimeout(() => {
                     const q = query.toLowerCase();
                     let reply = "I am restricted to discussing Aman's professional profile. Ask about his skills or projects.";
-                    
+
                     if (q.includes('nexus')) {
                         reply = "NEXUS is a premium cross-platform audio app developed by Aman using Flutter & Python, featuring Spotify link processing and an offline music player with Day/Night themes.";
                     } else if (q.includes('summify')) {
                         reply = "Summify is an AI-powered document summarization app built by Aman with Flutter & Python Flask, integrating BERT and BART NLP models.";
-                    } else if(q.includes('python') || q.includes('ai') || q.includes('nlp') || q.includes('bert')) {
+                    } else if (q.includes('python') || q.includes('ai') || q.includes('nlp') || q.includes('bert')) {
                         reply = "Aman leverages Python & Flask for backend services and AI workflows, incorporating BERT & BART models for text summarization.";
                     } else if (q.includes('flutter') || q.includes('app') || q.includes('mobile')) {
                         reply = "Aman builds responsive cross-platform applications using Flutter & Dart (Riverpod, BLoC, Provider) with Firebase & REST API integration.";
@@ -497,7 +506,7 @@ if (aiToggle && aiPanel) {
 
                     aiLog.innerHTML += `<p class="ai-msg">> ${reply}</p>`;
                     aiLog.scrollTop = aiLog.scrollHeight;
-                    
+
                     // Spike HUD on AI reply
                     if (typeof spikeHUD === 'function') spikeHUD(60);
                 }, 800);
@@ -512,7 +521,7 @@ const cpuBar = document.getElementById('cpu-bar');
 const memBar = document.getElementById('mem-bar');
 
 function jitterHUD() {
-    if(cpuBar && memBar) {
+    if (cpuBar && memBar) {
         // Randomly hover between 10% and 40%
         cpuBar.style.height = `${Math.floor(Math.random() * 30) + 10}%`;
         memBar.style.height = `${Math.floor(Math.random() * 30) + 10}%`;
@@ -522,7 +531,7 @@ setInterval(jitterHUD, 2000);
 
 // Function to spike HUD on user interaction
 function spikeHUD(intensity = 90) {
-    if(cpuBar && memBar) {
+    if (cpuBar && memBar) {
         cpuBar.style.height = `${intensity}%`;
         memBar.style.height = `${intensity - 10}%`;
         setTimeout(jitterHUD, 500);
@@ -531,7 +540,7 @@ function spikeHUD(intensity = 90) {
 
 // Spike on global clicks and scroll milestones
 document.addEventListener('click', () => spikeHUD(60));
-window.addEventListener('scroll', () => { if(window.scrollY % 500 < 50) spikeHUD(70); });
+window.addEventListener('scroll', () => { if (window.scrollY % 500 < 50) spikeHUD(70); });
 
 
 // ==========================================================
@@ -540,14 +549,14 @@ window.addEventListener('scroll', () => { if(window.scrollY % 500 < 50) spikeHUD
 function triggerVisitorAlert() {
     // Check if we already logged this user during this browser session
     if (!sessionStorage.getItem('sys_visitor_logged')) {
-        
+
         // YOUR SECRET TOPIC NAME HERE (Must match the app exactly)
-        const secretTopic = "aman_sys_alert_98x7z_portfolio_log"; 
-        
+        const secretTopic = "aman_sys_alert_98x7z_portfolio_log";
+
         // Grab some basic non-invasive data
         const time = new Date().toLocaleTimeString();
         const platform = navigator.platform || "Unknown OS";
-        
+
         // Send the Push Notification via ntfy
         fetch(`https://ntfy.sh/${secretTopic}`, {
             method: 'POST',
@@ -561,7 +570,7 @@ function triggerVisitorAlert() {
             // Silently fail if they have ad-blockers preventing fetch
             console.log("Tracking ping suppressed.");
         });
-        
+
         // Lock it so it doesn't fire again until they close their browser
         sessionStorage.setItem('sys_visitor_logged', 'true');
     }
@@ -570,7 +579,7 @@ function triggerVisitorAlert() {
 // Initialize the tracker once the window loads
 window.addEventListener('load', () => {
     // Add a slight delay so it doesn't slow down the visual page loading
-    setTimeout(triggerVisitorAlert, 2000); 
+    setTimeout(triggerVisitorAlert, 2000);
 });
 
 // --- MOBILE NAVIGATION DRAWER & 3D RECENT CARD CONTROLLER ---
@@ -588,11 +597,11 @@ function openMobileDrawer(e) {
     if (mobileDrawer && mobileBackdrop) {
         savedScrollY = window.scrollY;
         document.body.classList.add('mobile-menu-open');
-        
+
         // Translate main content up to preserve visual scroll position inside the 100vh wrapper
         const mainEl = document.querySelector('main');
         if (mainEl) mainEl.style.transform = `translateY(-${savedScrollY}px)`;
-        
+
         mobileDrawer.classList.add('active');
         mobileBackdrop.classList.add('active');
         if (typeof playUISound === 'function' && typeof clickSound !== 'undefined') playUISound(clickSound);
@@ -602,12 +611,12 @@ function openMobileDrawer(e) {
 function closeMobileDrawer() {
     if (mobileDrawer && mobileBackdrop) {
         document.body.classList.remove('mobile-menu-open');
-        
+
         // Restore normal flow and native scroll position
         const mainEl = document.querySelector('main');
         if (mainEl) mainEl.style.transform = '';
         window.scrollTo(0, savedScrollY);
-        
+
         mobileDrawer.classList.remove('active');
         mobileBackdrop.classList.remove('active');
         if (typeof playUISound === 'function' && typeof clickSound !== 'undefined') playUISound(clickSound);
@@ -653,7 +662,7 @@ const navHighlightObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             const id = entry.target.getAttribute('id');
             const targetHash = `#${id}`;
-            
+
             // Update Mobile Drawer
             mobileNavItems.forEach(navItem => {
                 navItem.classList.remove('highlight');
@@ -661,7 +670,7 @@ const navHighlightObserver = new IntersectionObserver((entries) => {
                     navItem.classList.add('highlight');
                 }
             });
-            
+
             // Update Desktop Nav
             const desktopNavItems = document.querySelectorAll('.desktop-nav .nav-item[href^="#"]');
             desktopNavItems.forEach(navItem => {
@@ -725,7 +734,7 @@ if (mobileColorCycle && desktopColorCycle) {
     mobileColorCycle.addEventListener('click', () => { desktopColorCycle.click(); });
 }
 if (mobileSoundToggle && desktopSoundToggle) {
-    mobileSoundToggle.addEventListener('click', () => { 
+    mobileSoundToggle.addEventListener('click', () => {
         desktopSoundToggle.click();
         const icon = mobileSoundToggle.querySelector('i');
         if (icon) icon.className = desktopSoundToggle.textContent.includes('ON') ? 'fas fa-volume-high' : 'fas fa-volume-xmark';
@@ -734,3 +743,33 @@ if (mobileSoundToggle && desktopSoundToggle) {
 if (mobileThemeToggle && desktopThemeToggle) {
     mobileThemeToggle.addEventListener('click', () => { desktopThemeToggle.click(); });
 }
+
+// --- 16. GLOBAL UI SOUND EFFECTS ---
+(function initGlobalAudio() {
+    const globalHoverSound = new Audio('assets/Hover.wav');
+    globalHoverSound.volume = 0.2;
+    const globalClickSound = new Audio('assets/click.mp3');
+    globalClickSound.volume = 0.4;
+
+    // Attach to all interactive elements in the main portfolio
+    document.querySelectorAll('a, button, .cyber-btn, .chip, .nav-item, .project-card, .social-icon').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            globalHoverSound.currentTime = 0;
+            globalHoverSound.play().catch(() => { }); // Catch autoplay blocks silently
+        });
+
+        el.addEventListener('click', () => {
+            globalClickSound.currentTime = 0;
+            globalClickSound.play().catch(() => { });
+        });
+    });
+
+    // Provide the playUISound function for the CLI terminal
+    window.clickSound = globalClickSound;
+    window.playUISound = function (soundObj) {
+        if (soundObj) {
+            soundObj.currentTime = 0;
+            soundObj.play().catch(() => { });
+        }
+    };
+})();

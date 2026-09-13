@@ -39,7 +39,7 @@ function initSPA() {
     });
 
     window.addEventListener('popstate', () => {
-        navigateTo(window.location.pathname.split('/').pop() || 'index.html', false);
+        navigateTo(window.location.pathname.split('/').pop() || 'portfolio.html', false);
     });
 }
 

@@ -3,409 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMAN UDEWAL | App Developer & Software Engineer</title>
+    <title>Aman Udewal - Intro</title>
     
-    <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
-
+    <!-- Core Portfolio CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="intro.css">
     
+    <!-- Portfolio Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 </head>
 <body data-theme="dark">
 
-    <script>
-        (function() {
-            var localTheme = localStorage.getItem('portfolio-theme');
-            if (localTheme) { document.body.setAttribute('data-theme', localTheme); }
-        })();
-    </script>
-
-    <audio id="bg-music" loop><source src="assets/bg-music.mp3" type="audio/mp3"></audio>
-    <audio id="hover-sound" src="assets/hover.mp3"></audio>
-    <audio id="click-sound" src="assets/click.mp3"></audio>
-
+    <!-- Same Three.js Canvas as Portfolio -->
     <canvas id="webgl-canvas"></canvas>
-
+    
+    <!-- Background Grid & Noise -->
     <div class="bg-grid"></div>
     <div class="noise-overlay"></div>
 
+    <!-- Custom Cursor -->
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
-    <div class="sys-diagnostics">
-        <div class="diag-block">
-            <span>CPU_LOAD</span>
-            <div class="diag-bar-bg"><div class="diag-bar-fill" id="cpu-bar"></div></div>
-        </div>
-        <div class="diag-block">
-            <span>MEM_ALLOC</span>
-            <div class="diag-bar-bg"><div class="diag-bar-fill" id="mem-bar"></div></div>
-        </div>
-    </div>
-
-    <div class="ai-widget-container">
-        <button id="ai-toggle" class="liquid-glass-btn"><i class="fas fa-robot"></i> SYS_AI</button>
-        <div class="ai-chat-panel liquid-glass-card" id="ai-panel">
-            <div class="ai-header">AMAN.AI // AGENT_ONLINE</div>
-            <div class="ai-body" id="ai-chat-log">
-                <p class="ai-msg">System AI initialized. Ask me about Aman's skills, projects (NEXUS, Summify), or education.</p>
+    <div class="intro-screen">
+        
+        <!-- Left Side: Content -->
+        <div class="intro-content">
+            <!-- Dynamic Typing Sub Text -->
+            <div class="meta-tag stagger-elem" style="justify-content: flex-start; min-height: 25px; align-items: center; display: flex;">
+                <span style="color: var(--secondary-text); margin-right: 8px;">//</span>
+                <span id="typewriter-text" style="color: var(--accent); font-weight: bold; letter-spacing: 1px;"></span>
+                <span class="blinking-cursor"></span>
             </div>
-            <div class="ai-input-area">
-                <span>></span>
-                <input type="text" id="ai-input" placeholder="Query system..." autocomplete="off">
+            
+            <div class="hero-title-wrapper stagger-elem" style="margin-bottom: 30px;">
+                <div class="hero-title-gradient-bg"></div>
+                <!-- Added periodic glitch animation class -->
+                <h1 class="glitch-title massive-title periodic-glitch">
+                    AMAN <br>
+                    <span class="hollow">UDEWAL</span>
+                </h1>
             </div>
-        </div>
-    </div>
-
-    <!-- System Boot Loading Screen -->
-    <div id="loader">
-        <div class="sys-loading">
-            <div class="blink-text">SYSTEM BOOT_SEQUENCE</div>
-            <div class="load-bar-wrapper">
-                <div class="load-bar"></div>
-            </div>
-            <div class="hex-codes">0x45F... LOADING EXPERIENCE</div>
-        </div>
-    </div>
-
-    <!-- Mobile Navigation Drawer Overlay (Separated Slide-out Drawer) -->
-    <div id="mobile-menu-backdrop" class="mobile-menu-backdrop"></div>
-    <aside id="mobile-drawer" class="mobile-menu-drawer" aria-label="Mobile Navigation">
-        <div class="mobile-drawer-header">
-            <div class="profile-info">
-                <div>
-                    <div class="profile-name">AMAN.SYS</div>
-                    <div class="profile-status"><span class="dot"></span> ONLINE</div>
+            
+            <!-- Terminal Typing Box -->
+            <div class="interactive-terminal stagger-elem" style="width: 100%; max-width: 450px; min-height: 160px; overflow: hidden; margin-bottom: 40px; text-align: left;">
+                <div id="cli-output" style="color: var(--secondary-text); line-height: 1.6;">
+                    <!-- Content will be typed out via JS -->
                 </div>
             </div>
-            <button class="mobile-close-btn" id="mobile-close" aria-label="Close Menu">
-                <i class="fas fa-times"></i>
+            
+            <button class="cyber-btn enter-btn" style="opacity: 1 !important; visibility: visible !important; display: block !important; z-index: 9999;">
+                <span class="btn-text">INITIALIZE PROGRAM</span>
+                <span class="btn-glitch"></span>
             </button>
         </div>
-        <div class="mobile-drawer-content">
-            <nav class="mobile-nav-list">
-                <a href="#hero" class="mobile-nav-item">
-                    <i class="fas fa-terminal nav-icon"></i>
-                    <span>[01] HOME</span>
-                </a>
-                <a href="#about" class="mobile-nav-item">
-                    <i class="fas fa-database nav-icon"></i>
-                    <span>[02] DATA // ABOUT</span>
-                </a>
-                <a href="#experience" class="mobile-nav-item">
-                    <i class="fas fa-graduation-cap nav-icon"></i>
-                    <span>[03] LOG // EDUCATION</span>
-                </a>
-                <a href="#work" class="mobile-nav-item">
-                    <i class="fas fa-folder-open nav-icon"></i>
-                    <span>[04] WORK // PROJECTS</span>
-                </a>
-                <a href="#contact" class="mobile-nav-item highlight">
-                    <i class="fas fa-paper-plane nav-icon"></i>
-                    <span>[05] COMM_HUB // CONTACT</span>
-                </a>
-            </nav>
-        </div>
-        <div class="mobile-drawer-controls">
-            <div class="drawer-controls-title">SYSTEM_SETTINGS</div>
-            <div class="drawer-controls-buttons">
-                <button id="mobile-color-cycle" class="drawer-btn"><i class="fas fa-palette"></i> OVERCLOCK [CYAN]</button>
-                <button id="mobile-sound-toggle" class="drawer-btn"><i class="fas fa-volume-mute"></i> SOUND</button>
-                <button id="mobile-theme-toggle" class="drawer-btn"><i class="fas fa-moon"></i> THEME</button>
+
+        <!-- Right Side: Model -->
+        <div class="intro-visual stagger-model">
+            <!-- Sleek Loading State -->
+            <div id="model-loader" class="scanning-loader">
+                <div class="spinner"></div>
+                <div>SCANNING ASSETS...</div>
+            </div>
+
+            <div class="scanner-frame">
+                <!-- Glowing Hologram Base -->
+                <div class="holo-base"></div>
+                <model-viewer 
+                    src="assets/model.glb" 
+                    shadow-intensity="1.5" 
+                    shadow-softness="1"
+                    tone-mapping="aces"
+                    exposure="1.2"
+                    environment-image="neutral"
+                    autoplay
+                    animation-name="Idle"
+                    field-of-view="30deg"
+                    class="model-avatar"
+                ></model-viewer>
+            </div>
+            <div class="model-caption">
+                FIG 1.0: AMAN UDEWAL
             </div>
         </div>
-    </aside>
 
-    <!-- Main Site Wrapper (Recedes into 3D floating card on mobile drawer swipe/open) -->
-    <div id="site-wrapper" class="site-wrapper">
-        <header class="fixed-header">
-            <div class="brand">AMAN<span class="accent">_</span>UDEWAL</div>
-            <div class="status-indicator">
-                <span class="dot"></span> SYSTEM ONLINE
-            </div>
-            <nav class="desktop-nav">
-                <a href="#hero" class="nav-item">HOME [01]</a>
-                <a href="#about" class="nav-item">DATA [02]</a>
-                <a href="#experience" class="nav-item">LOG [03]</a>
-                <a href="#work" class="nav-item">WORK [04]</a>
-                <a href="#contact" class="nav-item highlight">COMM_HUB [05]</a>
-                <button id="color-cycle" class="nav-item toggle-btn">OVERCLOCK [CYAN]</button>
-                <button id="sound-toggle" class="nav-item toggle-btn">SOUND [OFF]</button>
-                <button id="theme-toggle" class="nav-item toggle-btn">THEME [SW]</button>
-            </nav>
-            <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Open Navigation Menu">
-                <i class="fas fa-bars"></i>
-            </button>
-        </header>
-
-        <main>
-            <section id="hero">
-                <div class="hero-grid">
-                    <div class="hero-content">
-                        <div class="meta-tag">
-                            <span>// COMPUTER_ENGINEERING_GRADUATE</span>
-                            <span>// FLUTTER_&amp;_AI_DEVELOPER</span>
-                        </div>
-                        <div class="hero-title-wrapper">
-                            <div class="hero-title-gradient-bg"></div>
-                            <h1 class="glitch-title">
-                                APP <br>
-                                <span class="hollow">DEVELOPER</span> <br>
-                                &amp; SOFTWARE ENGINEER
-                            </h1>
-                        </div>
-                        
-                        <div class="interactive-terminal" id="hero-terminal" onclick="document.getElementById('cli-input').focus()">
-                            <div id="cli-output">
-                                > INITIATING FLUTTER &amp; PYTHON ENGINES...<br>
-                                > DEPLOYING AI &amp; NLP (BERT / BART) PIPELINES...<br>
-                                > TARGET: CROSS-PLATFORM ARCHITECTURE<br>
-                                > Type 'help' to see available commands.
-                            </div>
-                            <div class="cli-input-line">
-                                <span class="cli-prompt">visitor@aman.sys:~$</span>
-                                <input type="text" id="cli-input" autocomplete="off" spellcheck="false">
-                            </div>
-                        </div>
-                        
-                        <a href="#work" class="cyber-btn" style="margin-top: 30px;">
-                            <span class="btn-text">EXPLORE PROJECTS</span>
-                            <span class="btn-glitch"></span>
-                        </a>
-                    </div>
-
-                    <div class="hero-visual">
-                        <div class="scanner-frame">
-                            <model-viewer 
-                                id="hero-avatar"
-                                src="assets/model.glb" 
-                                shadow-intensity="1.5" 
-                                shadow-softness="1"
-                                tone-mapping="aces"
-                                exposure="1.2"
-                                camera-controls="false"
-                                disable-zoom disable-pan disable-tap
-                                environment-image="neutral"
-                                autoplay
-                                animation-name="Idle"
-                                field-of-view="30deg"
-                                class="model-avatar"
-                            ></model-viewer>
-                        </div>
-                        <div class="model-caption">
-                            FIG 1.0: AMAN UDEWAL // ARCHITECT
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="marquee-container">
-                    <div class="marquee-content">
-                        FLUTTER DEVELOPER /// PYTHON &amp; AI /// REACT.JS &amp; NEXT.JS /// REST APIs &amp; FIREBASE /// BERT &amp; BART NLP /// DART /// 
-                        FLUTTER DEVELOPER /// PYTHON &amp; AI /// REACT.JS &amp; NEXT.JS /// REST APIs &amp; FIREBASE /// BERT &amp; BART NLP /// DART /// 
-                    </div>
-                </div>
-            </section>
-
-            <section id="about">
-                <div class="section-border-top"></div>
-                <div class="split-layout">
-                    <div class="bio-panel">
-                        <h2 class="section-header">CORE_DATA</h2>
-                        <p class="justify-text">
-                            Computer Engineering graduate and software developer with hands-on experience in 
-                            <span class="accent">Flutter, Dart, Python, React.js, JavaScript, and TypeScript</span>.
-                            Experienced in building responsive component-based applications, integrating REST APIs, Firebase, 
-                            and building AI-powered summarization &amp; audio processing systems.
-                        </p>
-                        <div class="stats-grid">
-                            <div class="stat-box">
-                                <h3>B.TECH</h3>
-                                <span>COMP_ENGINEERING</span>
-                            </div>
-                            <div class="stat-box">
-                                <h3 id="gh-repos">--</h3>
-                                <span>GITHUB_REPOS</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="skills-panel">
-                        <h2 class="section-header">ARSENAL</h2>
-                        <ul class="skill-list">
-                            <li class="skill-item"><span>FLUTTER / DART / STATE MGMT</span><div class="progress"><div class="fill" style="width: 95%"></div></div></li>
-                            <li class="skill-item"><span>PYTHON / FLASK / REST APIs</span><div class="progress"><div class="fill" style="width: 92%"></div></div></li>
-                            <li class="skill-item"><span>REACT.JS / NEXT.JS / TS</span><div class="progress"><div class="fill" style="width: 88%"></div></div></li>
-                            <li class="skill-item"><span>AI &amp; NLP (BERT / BART)</span><div class="progress"><div class="fill" style="width: 85%"></div></div></li>
-                            <li class="skill-item"><span>FIREBASE / SQL / WEBSOCKETS</span><div class="progress"><div class="fill" style="width: 90%"></div></div></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section id="experience">
-                <div class="section-border-top"></div>
-                <div style="text-align: center; margin-top: 60px;">
-                    <h2 class="section-header">SYSTEM_LOG: EDUCATION</h2>
-                </div>
-                <div class="timeline">
-                    <div class="line"></div>
-                    <div class="timeline-item">
-                        <div class="dot"></div>
-                        <div class="content">
-                            <h3>08/2022 – 06/2026</h3>
-                            <h4>Sandipani Technical Campus Of Engineering</h4>
-                            <p>BTech. in Computer Engineering // Latur</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="dot"></div>
-                        <div class="content">
-                            <h3>04/2020 – 06/2022</h3>
-                            <h4>Reliance College</h4>
-                            <p>Higher Secondary Certificate (HSC) // Latur</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="dot"></div>
-                        <div class="content">
-                            <h3>05/2017 – 01/2020</h3>
-                            <h4>Shri Deshikendra Vidyalaya</h4>
-                            <p>Secondary School Certificate (SSC) // Latur</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="work">
-                <div class="section-border-top"></div>
-                <div class="container">
-                    <h2 class="section-header big" style="padding: 40px;">SELECTED_WORKS</h2>
-                    
-                    <div class="filter-chips">
-                        <button class="chip active" data-filter="all">All</button>
-                        <button class="chip" data-filter="Mobile">Mobile</button>
-                        <button class="chip" data-filter="AI">AI</button>
-                        <button class="chip" data-filter="Python">Python</button>
-                    </div>
-
-                    <div class="project-catalog">
-                        
-                        <div class="catalog-item" data-category="Mobile Python">
-                            <div class="cat-id">001</div>
-                            <div class="cat-info">
-                                <h3>NEXUS</h3>
-                                <p>CROSS-PLATFORM AUDIO APPLICATION</p>
-                                <div class="tags"><span>FLUTTER</span> / <span>PYTHON</span> / <span>SPOTIFY API</span> / <span>OFFLINE PLAYER</span></div>
-                                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
-                                    Premium cross-platform audio app using Flutter and Python. Features an integrated offline music player, dynamic Day/Night themes, and Python backend for processing Spotify links.
-                                </p>
-                            </div>
-                            <div class="cat-action"><a href="project-nexus.html"><i class="fas fa-arrow-right"></i></a></div>
-                        </div>
-                        
-                        <div class="catalog-item" data-category="AI Mobile Python">
-                            <div class="cat-id">002</div>
-                            <div class="cat-info">
-                                <h3>SUMMIFY</h3>
-                                <p>AI-POWERED DOCUMENT SUMMARIZATION</p>
-                                <div class="tags"><span>FLUTTER</span> / <span>PYTHON</span> / <span>FLASK</span> / <span>BERT</span> / <span>BART</span></div>
-                                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
-                                    AI document summarization app built with Flutter frontend and Flask backend. Integrates BERT and BART NLP models to convert lengthy documents into concise summaries.
-                                </p>
-                            </div>
-                            <div class="cat-action"><a href="project-summify.html"><i class="fas fa-arrow-right"></i></a></div>
-                        </div>
-
-                        <div class="catalog-item" data-category="WebGL Mobile">
-                            <div class="cat-id">003</div>
-                            <div class="cat-info">
-                                <h3>3D CYBER PORTFOLIO</h3>
-                                <p>WEBGL &amp; THREE.JS CYBERPUNK EXPERIENCE</p>
-                                <div class="tags"><span>THREE.JS</span> / <span>GSAP</span> / <span>WEBGL</span> / <span>CSS3</span></div>
-                                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
-                                    Interactive 3D cyberpunk developer portfolio with custom Three.js lighting, 3D model viewer, interactive CLI terminal, and AI assistant chatbot.
-                                </p>
-                            </div>
-                            <div class="cat-action"><a href="project-cyber-portfolio.html"><i class="fas fa-arrow-right"></i></a></div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <section id="contact">
-                <div class="section-border-top"></div>
-                
-                <div class="container" style="padding-top: 50px; text-align: center;">
-                    <h2 class="section-header">COMMUNICATION_HUB</h2>
-                </div>
-
-                <div class="comm-hub">
-                    
-                    <div class="comm-panel liquid-glass-card">
-                        <div class="comm-header">
-                            <i class="fas fa-coffee"></i>
-                            <h2>BUY ME A COFFEE</h2>
-                        </div>
-                        <form class="email-form" action="mailto:udewal.aman@gmail.com" method="POST" enctype="text/plain">
-                            <div class="form-group">
-                                <label>YOUR EMAIL:</label>
-                                <input type="email" name="email" class="cyber-input" placeholder="your-email@example.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label>SUBJECT:</label>
-                                <input type="text" name="subject" class="cyber-input" placeholder="Project Inquiry / Hiring" required>
-                            </div>
-                            <div class="form-group">
-                                <label>MESSAGE:</label>
-                                <textarea name="message" class="cyber-input" placeholder="Let's build something awesome..." required></textarea>
-                            </div>
-                            <button type="submit" class="cyber-btn liquid-glass-btn" style="width:100%; margin-top:10px;">
-                                SEND MESSAGE
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="links-panel liquid-glass-card">
-                        <div class="footer-links" style="display: flex; flex-direction: column; gap: 20px;">
-                            <a href="mailto:udewal.aman@gmail.com"><i class="fas fa-envelope"></i> EMAIL: udewal.aman@gmail.com</a>
-                            <a href="tel:+918767569330"><i class="fas fa-phone"></i> PHONE: +91 87675 69330</a>
-                            <a href="https://linkedin.com/in/aman-udewal" target="_blank"><i class="fab fa-linkedin"></i> LINKEDIN_PROFILE</a>
-                            <a href="https://github.com/amanudewal" target="_blank"><i class="fab fa-github"></i> GITHUB_REPO</a>
-                            <a href="AMAN_RAMAKANT_UDEWAL_FlowCV_Resume_2026-08-19.pdf" target="_blank"><i class="fas fa-file-pdf"></i> RESUME_OFFICIAL.PDF</a>
-                        </div>
-                    </div>
-
-                </div>
-                
-                <div class="marquee-container reverse">
-                    <div class="marquee-content">
-                        ENGINEERED BY AMAN UDEWAL /// 2026 /// ENGINEERED BY AMAN UDEWAL /// 2026 ///
-                    </div>
-                </div>
-            </section>
-
-            <button id="back-to-top" aria-label="Back to top">
-                <i class="fas fa-chevron-up"></i>
-            </button>
-        </main>
     </div>
-    
-    <script src="script.js"></script>
 
+    <script>
+        // --- 1. EXACT THREE.JS PARTICLES FROM PORTFOLIO ---
+        function initThreeJS() {
+            const canvas = document.getElementById('webgl-canvas');
+            if (!canvas || typeof THREE === 'undefined') return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 800; // Exact density from portfolio
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 5; 
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            const material = new THREE.PointsMaterial({ size: 0.005, color: 0xffffff, transparent: true, opacity: 0.5 });
+            const particlesMesh = new THREE.Points(particlesGeometry, material);
+            scene.add(particlesMesh);
+
+            camera.position.z = 2;
+
+            let mouseX = 0;
+            let mouseY = 0;
+            document.addEventListener('mousemove', (event) => {
+                mouseX = event.clientX / window.innerWidth - 0.5;
+                mouseY = event.clientY / window.innerHeight - 0.5;
+            });
+
+            const animate = () => {
+                requestAnimationFrame(animate);
+                particlesMesh.rotation.y += 0.001;
+                
+                if (typeof gsap !== "undefined") {
+                    gsap.to(particlesMesh.rotation, {
+                        x: -mouseY * 0.5,
+                        y: mouseX * 0.5,
+                        duration: 2
+                    });
+                }
+                
+                const currentAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+                if(currentAccent) material.color.set(currentAccent);
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        initThreeJS();
+
+        // --- 2. CUSTOM CURSOR ---
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+        if (cursor && cursorFollower) {
+            gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+            gsap.set(cursorFollower, { xPercent: -50, yPercent: -50 });
+            let cursorX = gsap.quickTo(cursor, "x", {duration: 0.05, ease: "power3"});
+            let cursorY = gsap.quickTo(cursor, "y", {duration: 0.05, ease: "power3"});
+            let followerX = gsap.quickTo(cursorFollower, "x", {duration: 0.4, ease: "power3"});
+            let followerY = gsap.quickTo(cursorFollower, "y", {duration: 0.4, ease: "power3"});
+            
+            // 3D Parallax QuickTo variables
+            let titleX = gsap.quickTo('.hero-title-wrapper', "x", {duration: 0.5, ease: "power3"});
+            let titleY = gsap.quickTo('.hero-title-wrapper', "y", {duration: 0.5, ease: "power3"});
+            let titleRotX = gsap.quickTo('.hero-title-wrapper', "rotateX", {duration: 0.5, ease: "power3"});
+            let titleRotY = gsap.quickTo('.hero-title-wrapper', "rotateY", {duration: 0.5, ease: "power3"});
+            
+            document.addEventListener('mousemove', (e) => {
+                cursorX(e.clientX);
+                cursorY(e.clientY);
+                followerX(e.clientX);
+                followerY(e.clientY);
+
+                // 3D Text Parallax Effect
+                const normX = (e.clientX / window.innerWidth) - 0.5;
+                const normY = (e.clientY / window.innerHeight) - 0.5;
+                titleX(normX * -30);
+                titleY(normY * -30);
+                titleRotX(normY * 15);
+                titleRotY(normX * -15);
+            });
+
+            const interactables = document.querySelectorAll('.cyber-btn');
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    gsap.to(cursorFollower, { width: 60, height: 60, backgroundColor: 'rgba(0, 243, 255, 0.1)', duration: 0.3 });
+                    gsap.to(cursor, { scale: 0, duration: 0.2 }); 
+                });
+                el.addEventListener('mouseleave', () => {
+                    gsap.to(cursorFollower, { width: 40, height: 40, backgroundColor: 'transparent', duration: 0.3 });
+                    gsap.to(cursor, { scale: 1, duration: 0.2 }); 
+                });
+            });
+        }
+
+        // --- 3. ENTRANCE ANIMATIONS ---
+        const tl = gsap.timeline();
+        tl.from('.stagger-model', { opacity: 0, scale: 0.9, duration: 1.5, ease: "power3.out", x: 50 })
+          .from('.stagger-elem', { y: 40, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out" }, "-=1");
+
+        // --- 4. DYNAMIC SUB TEXT TYPEWRITER ---
+        const roles = ["APP DEVELOPER", "SOFTWARE ENGINEER", "PYTHON DEVELOPER", "AI ENGINEER"];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeTarget = document.getElementById("typewriter-text");
+
+        function typeWriterRole() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typeTarget.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeTarget.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 100;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2500; // Pause at end of word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 500; // Pause before new word
+            }
+
+            setTimeout(typeWriterRole, typeSpeed);
+        }
+        // Start role typing after entrance animation
+        setTimeout(typeWriterRole, 1500);
+
+        // --- 5. DYNAMIC TERMINAL TYPEWRITER ---
+        const terminalLines = [
+            "> SYSTEM_BOOT_SEQUENCE",
+            "> INITIALIZING_ENVIRONMENT",
+            "> LOADING_ASSETS: OK",
+            "> STATUS: ONLINE",
+            "> WAITING FOR USER INPUT_"
+        ];
+        const terminalTarget = document.getElementById('cli-output');
+        let termLine = 0;
+        let termChar = 0;
+
+        function typeTerminal() {
+            if (termLine < terminalLines.length) {
+                if (termChar === 0) {
+                    terminalTarget.innerHTML += `<div id="line-${termLine}"></div>`;
+                }
+                
+                const currentLineStr = terminalLines[termLine];
+                // Handle HTML spans if we wanted colors, but plain text is fine here
+                document.getElementById(`line-${termLine}`).textContent += currentLineStr.charAt(termChar);
+                termChar++;
+                
+                if (termChar >= currentLineStr.length) {
+                    termChar = 0;
+                    termLine++;
+                    setTimeout(typeTerminal, 400); // Pause between lines
+                } else {
+                    setTimeout(typeTerminal, 25); // Speed of character typing
+                }
+            }
+        }
+        setTimeout(typeTerminal, 1800);
+
+        // --- 6. 3D MODEL LOADER HANDLING ---
+        const viewer = document.querySelector('model-viewer');
+        const loader = document.getElementById('model-loader');
+        viewer.addEventListener('load', () => {
+            gsap.to(loader, { opacity: 0, duration: 0.5, onComplete: () => loader.style.display = 'none' });
+            gsap.to(viewer, { opacity: 1, duration: 1 });
+        });
+
+        // --- 7. AUDIO EFFECTS (Real Audio Assets) ---
+        const hoverSound = new Audio('assets/Hover.wav');
+        hoverSound.volume = 0.5; // Adjust volume as needed
+        
+        const clickSound = new Audio('assets/click.mp3');
+        clickSound.volume = 0.8;
+        
+        // Browsers block audio until the first interaction. Unlock it anywhere on click.
+        document.body.addEventListener('click', () => {
+            // This empty listener satisfies some mobile browsers' requirements
+        }, { once: true });
+
+        function playHoverSound() {
+            hoverSound.currentTime = 0; // Rewind to start for rapid hovering
+            hoverSound.play().catch(e => console.log('Audio play blocked until click', e));
+        }
+
+        function playClickSound() {
+            clickSound.currentTime = 0;
+            clickSound.play().catch(e => console.log('Audio play blocked until click', e));
+        }
+
+        const enterBtn = document.querySelector('.enter-btn');
+        enterBtn.addEventListener('mouseenter', playHoverSound);
+
+        // --- 8. CRT TURN-OFF TRANSITION ---
+        enterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            playClickSound();
+            
+            // Fade out background canvas first
+            gsap.to('#webgl-canvas', { opacity: 0, duration: 0.2 });
+            
+            // CRT Screen collapse effect
+            const screen = document.querySelector('.intro-screen');
+            const transitionTl = gsap.timeline({
+                onComplete: () => {
+                    console.log("INITIALIZE PROGRAM clicked! Routing to main portfolio.");
+                    window.location.href = 'portfolio.html?skipIntro=true';
+                }
+            });
+            
+            transitionTl
+                .to(screen, { scaleY: 0.01, duration: 0.25, ease: "power2.in" })
+                .to(screen, { scaleX: 0, duration: 0.25, ease: "power2.out" })
+                .to(document.body, { backgroundColor: "#000", duration: 0.1 }, "-=0.1");
+        });
+    </script>
 </body>
 </html>
